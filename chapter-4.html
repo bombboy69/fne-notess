@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch 4: Perception Layer, Sensors, Actuators & IoT Devices — Fog & Edge Computing Master Textbook</title>
+<meta name="description" content="Ch 4: Perception Layer, Sensors, Actuators & IoT Devices - Complete university-level textbook on Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class=""><span class="ch-num">🏠</span> Home</a>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html" class="active"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">Chapter 4</span>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+<h1>Chapter 4: Perception Layer, Sensors, Actuators, and IoT Devices</h1>
+<p style="text-align:center; font-style:italic; font-size:1.2em; color:#718096;">The Definitive Master Textbook & Exam Guide</p>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#ch4-sec1">1. The Perception Layer Architecture</a></li>
+        <li><a href="#ch4-sec2">2. Deep Dive: Anatomy of an IoT Node</a></li>
+        <li><a href="#ch4-sec3">3. Sensors: Types, Metrics, and Failures</a></li>
+        <li><a href="#ch4-sec4">4. Actuators and Real-World Control Workflows</a></li>
+        <li><a href="#ch4-sec5">5. Microcontrollers (MCUs) & Embedded OS</a></li>
+        <li><a href="#ch4-sec6">6. Power Management: Sleepy Nodes & Duty Cycling</a></li>
+        <li><a href="#ch4-sec7">7. Edge AI at the Device Level: TinyML</a></li>
+        <li><a href="#ch4-sec8">8. Real-World Case Studies</a></li>
+        <li><a href="#ch4-sec9">9. Exam Masterclass: Model Answers & Scenarios</a></li>
+    </ul>
+</div>
+
+<h2 id="ch4-sec1">1. The Perception Layer Architecture</h2>
+<h3>1.1 Introduction</h3>
+<p>In the 5-layer IoT architecture, the <strong>Perception Layer</strong> (also known as the Device or Physical Layer) is the absolute foundation. It serves as the physical boundary where the analog physical world (temperature, motion, chemical composition) is converted into the digital domain (1s and 0s), and vice versa.</p>
+<p>If the Cloud is the "brain," and the network is the "nervous system," the Perception Layer is the "eyes, ears, and hands" of an IoT deployment. Errors, poor calibration, or power failures at this layer will cascade upward, rendering the entire Fog and Cloud infrastructure useless—a concept known as <em>Garbage In, Garbage Out (GIGO)</em>.</p>
+
+<hr>
+
+<h2 id="ch4-sec2">2. Deep Dive: Anatomy of an IoT Node</h2>
+<p>An IoT device is not a single piece of hardware; it is an embedded system comprising several tightly integrated subsystems. Understanding this architecture is critical for system design questions.</p>
+
+<div class="diagram-box">
+<strong>[DIAGRAM: Internal Architecture of a Constrained IoT Node]</strong>
+
+                       +---------------------------------------------------+
+                       |                <span class="highlight">MICROCONTROLLER UNIT (MCU)</span>         |
+                       |                                                   |
++-----------------+    |  +-------------+    +---------+    +-----------+  |    +-----------------+
+| <span class="hardware">Physical World</span>  |    |  | <span class="hardware">ADC Module</span>  |    | <span class="hardware">CPU Core</span>|    | <span class="hardware">Memory</span>    |  |    | <span class="hardware">Transceiver</span>     |
+| (Temperature,   |===>|  | (Analog to  |===>| (ALU,   |<==>| (SRAM,    |  |===>| (BLE, LoRaWAN,  |==> TO FOG GATEWAY
+| Vibration, etc) |    |  |  Digital)   |    | Control)|    |  Flash)   |  |    |  Wi-Fi, 802.15.4|
++-----------------+    |  +-------------+    +---------+    +-----------+  |    +-----------------+
+  [ SENSOR ]           |         |                |               |        |
+                       |  +-------------+         |               |        |
++-----------------+    |  | <span class="hardware">DAC Module</span>  |         |               |        |
+| <span class="hardware">Physical Action</span> |<===|  | (Digital to |<========+---------------+        |
+| (Motor, Valve)  |    |  |  Analog)    |                                  |
++-----------------+    |  +-------------+                                  |
+  [ ACTUATOR ]         +---------------------------------------------------+
+                                              ^
+                                              |
+                       +---------------------------------------------------+
+                       |                  <span class="highlight">POWER MODULE</span>                     |
+                       |  [Battery] <==> [Power Management IC / Sleep]     |
+                       |  [Energy Harvester (Solar / Piezoelectric)]       |
+                       +---------------------------------------------------+
+</div>
+
+<h3>2.1 Component Breakdown</h3>
+<ul>
+    <li><strong>Sensors:</strong> Detect physical changes and generate an analog electrical signal (voltage/current).</li>
+    <li><strong>ADC (Analog-to-Digital Converter):</strong> A critical bridge. Microcontrollers only understand digital binary. The ADC samples the continuous analog voltage at specific intervals and converts it into a discrete digital number. <em>(Key metrics: Sampling Rate and Resolution, e.g., 12-bit ADC).</em></li>
+    <li><strong>MCU (Microcontroller Unit):</strong> The local brain. It processes the digital data, runs the embedded operating system, and decides whether to transmit the data or trigger an actuator.</li>
+    <li><strong>DAC (Digital-to-Analog Converter):</strong> Reverses the ADC process. Converts binary commands back into continuous analog signals to drive analog actuators (like variable-speed motors).</li>
+    <li><strong>Transceiver:</strong> Handles the Radio Frequency (RF) communication to send data to the Fog Gateway (using protocols like BLE or LoRa). It is usually the most power-hungry component.</li>
+    <li><strong>Power Management IC (PMIC):</strong> Controls voltage regulation and manages transitions between active and deep-sleep states to preserve battery life.</li>
+</ul>
+
+<hr>
+
+<h2 id="ch4-sec3">3. Sensors: Types, Metrics, and Failures</h2>
+
+<h3>3.1 Classification of Sensors</h3>
+<p>Sensors can be broadly classified based on their power requirements and data output.</p>
+<ul>
+    <li><strong>Passive vs. Active:</strong> 
+        <br><em>Passive sensors</em> (like thermistors or photoresistors) do not require an external power source to operate; they change their inherent electrical properties based on the environment. 
+        <br><em>Active sensors</em> (like LiDAR or ultrasonic sensors) require an external power source to emit a signal (light/sound) and measure the reflection.</li>
+    <li><strong>Analog vs. Digital:</strong>
+        <br><em>Analog</em> output a continuous voltage (requires an ADC). 
+        <br><em>Digital</em> sensors have a built-in ADC and communicate directly with the MCU via digital buses like I2C or SPI (e.g., the DHT22 digital temperature sensor).</li>
+</ul>
+
+<h3>3.2 Critical Sensor Metrics (Exam Focus)</h3>
+<p>When selecting a sensor for a 50-mark design scenario, you must justify your choice using these metrics:</p>
+<table>
+    <tr>
+        <th>Metric</th>
+        <th>Definition</th>
+        <th>Design Implication</th>
+    </tr>
+    <tr>
+        <td><strong>Accuracy</strong></td>
+        <td>How close the measured value is to the true physical value.</td>
+        <td>In healthcare, an inaccurate heart-rate monitor is fatal.</td>
+    </tr>
+    <tr>
+        <td><strong>Precision / Repeatability</strong></td>
+        <td>How consistently the sensor returns the exact same value for the same physical input.</td>
+        <td>A sensor can be highly precise but wildly inaccurate (always wrong by the exact same amount).</td>
+    </tr>
+    <tr>
+        <td><strong>Resolution</strong></td>
+        <td>The smallest incremental change in the physical environment the sensor can detect.</td>
+        <td>A 10-bit ADC provides 1024 distinct values. A 12-bit ADC provides 4096. Higher resolution requires more processing bandwidth.</td>
+    </tr>
+    <tr>
+        <td><strong>Drift</strong></td>
+        <td>The degradation of sensor accuracy over time due to physical wear, temperature changes, or aging.</td>
+        <td>Sensors deployed in harsh industrial environments require frequent <em>re-calibration</em> algorithms to compensate for drift.</td>
+    </tr>
+</table>
+
+<h3>3.3 Sensor Failures and Mitigation</h3>
+<p>Sensors fail. In a distributed IoT system, a failed sensor sending erroneous data can trigger catastrophic physical actuation (e.g., flooding a field or shutting down a nuclear reactor).</p>
+<ul>
+    <li><strong>Fail-Safe vs. Fail-Secure:</strong> A <em>Fail-Safe</em> system defaults to a state that prioritizes human safety (e.g., an electronic door lock opens if power fails). A <em>Fail-Secure</em> system prioritizes security (the door locks permanently if power fails).</li>
+    <li><strong>Byzantine Faults:</strong> A sensor doesn't just "die" (which is easy to detect). Instead, it stays alive but sends randomly incorrect, misleading data. <em>Mitigation:</em> Sensor fusion and redundancy. Deploy three sensors; if one reads 50°C and two read 20°C, the Fog node uses a voting algorithm to isolate the Byzantine sensor.</li>
+</ul>
+
+<hr>
+
+<h2 id="ch4-sec4">4. Actuators and Real-World Control Workflows</h2>
+
+<h3>4.1 Types of Actuators</h3>
+<p>Actuators are the "muscle" of the IoT system. They translate digital commands into physical force.</p>
+<ol>
+    <li><strong>Electric Actuators:</strong> Motors, servos, solenoids. Powered by electricity. High precision, clean, and easy to integrate with MCUs. (e.g., adjusting a smart HVAC vent).</li>
+    <li><strong>Pneumatic Actuators:</strong> Powered by compressed air. Fast acting, forceful, but require air compressors. (e.g., robotic arms on a factory assembly line).</li>
+    <li><strong>Hydraulic Actuators:</strong> Powered by pressurized fluid. Extremely high force and lifting capabilities. (e.g., autonomous heavy construction equipment).</li>
+</ol>
+
+<div class="diagram-box">
+<strong>[WORKFLOW: The Actuation Pipeline]</strong>
+
+<span class="highlight">FOG NODE COMMAND:</span> "Increase pipeline pressure by 10%" 
+       | (MQTT Packet via Wi-Fi)
+       v
+<span class="highlight">TRANSCEIVER:</span> Receives packet, interrupts MCU.
+       | (Digital Binary)
+       v
+<span class="highlight">MICROCONTROLLER (MCU):</span> Verifies security token, calculates required valve angle.
+       | (PWM Signal or I2C Command)
+       v
+<span class="highlight">MOTOR DRIVER / RELAY:</span> Low-voltage MCU signal triggers high-voltage power circuit.
+       | (High Current / 24V)
+       v
+<span class="highlight">ACTUATOR (Servo Motor):</span> Physically rotates the valve 15 degrees.
+</div>
+
+<hr>
+
+<h2 id="ch4-sec5">5. Microcontrollers (MCUs) & Embedded OS</h2>
+
+<h3>5.1 The Microcontroller (MCU)</h3>
+<p>An MCU is a highly integrated computer on a single chip. Unlike a microprocessor (CPU) in a laptop, an MCU contains the CPU, RAM (SRAM), ROM (Flash memory), and I/O peripherals all on one piece of silicon. This makes them cheap, low-power, and compact.</p>
+<p><strong>Industry Standards:</strong></p>
+<ul>
+    <li><strong>ARM Cortex-M Series:</strong> The industry standard for 32-bit IoT edge devices. Used in everything from smartwatches to industrial gateways.</li>
+    <li><strong>ESP32 / ESP8266:</strong> Extremely popular in rapid prototyping and smart homes due to highly integrated, built-in Wi-Fi and Bluetooth stacks.</li>
+</ul>
+
+<h3>5.2 Embedded Operating Systems</h3>
+<p>A standard OS like Windows or Linux (Ubuntu) is too "heavy" (requires gigabytes of storage and RAM) for a Mist-level IoT node. These devices require an RTOS (Real-Time Operating System).</p>
+<ul>
+    <li><strong>FreeRTOS / Zephyr / Contiki:</strong> These operating systems have footprints as small as 10 Kilobytes. </li>
+    <li><strong>Determinism:</strong> The primary feature of an RTOS is not throughput, but <em>determinism</em>. If an interrupt occurs (e.g., a crash sensor triggers), the RTOS guarantees the MCU will process that specific task within a strictly defined time limit (e.g., 1 millisecond), preempting all other background tasks.</li>
+</ul>
+
+<hr>
+
+<h2 id="ch4-sec6">6. Power Management: Sleepy Nodes & Duty Cycling</h2>
+
+<p>The most severe constraint in the Perception layer is power. Replacing batteries on 10,000 sensors deployed across a city's water pipe network is economically impossible. Devices must last 5 to 10 years on a single coin cell.</p>
+
+<h3>6.1 Sleep Modes</h3>
+<p>MCUs rarely run at 100% power continuously. They utilize aggressive power management ICs (PMICs).</p>
+<ul>
+    <li><strong>Active Mode:</strong> CPU running, Transceiver broadcasting. (Draws ~20mA to 100mA).</li>
+    <li><strong>Light Sleep:</strong> CPU paused, RAM retained, Transceiver off. Wakes up in microseconds. (Draws ~1mA).</li>
+    <li><strong>Deep Sleep:</strong> CPU off, RAM powered down. Only the Real-Time Clock (RTC) remains active. Wakes up via RTC timer or external pin interrupt. (Draws ~1µA to 5µA).</li>
+</ul>
+
+<h3>6.2 Duty Cycle Optimization (Exam Calculation Concept)</h3>
+<p>The <strong>Duty Cycle</strong> is the percentage of time a device spends in Active Mode compared to Deep Sleep. A lower duty cycle equals longer battery life.</p>
+<div class="concept-card">
+    <h4>Example Scenario: Smart Agriculture Moisture Sensor</h4>
+    <p>A sensor wakes up, takes a reading, and transmits it via LoRa. This takes 1 second (Active time). It then sleeps for 59 minutes and 59 seconds.</p>
+    <p><strong>Total Cycle Time:</strong> 60 minutes (3600 seconds).</p>
+    <p><strong>Active Time:</strong> 1 second.</p>
+    <p><strong>Duty Cycle:</strong> (1 / 3600) * 100 = <strong>0.027%</strong>.</p>
+    <p>Because the node sleeps for 99.973% of its life, a standard 2000mAh battery can easily last 10 years.</p>
+</div>
+
+<h3>6.3 Energy Harvesting</h3>
+<p>For truly perpetual operation, IoT nodes harvest ambient energy from their environment to continuously recharge super-capacitors.</p>
+<ul>
+    <li><strong>Photovoltaic (Solar):</strong> Used in outdoor agriculture and smart city parking meters.</li>
+    <li><strong>Piezoelectric (Kinetic/Vibration):</strong> Generates current when physically deformed. Used on vibrating factory motors or under smart highways to harvest energy from passing cars.</li>
+    <li><strong>Thermoelectric:</strong> Uses the Seebeck effect to generate voltage from temperature differentials (e.g., a hot industrial pipe in a cold room).</li>
+</ul>
+
+<hr>
+
+<h2 id="ch4-sec7">7. Edge AI at the Device Level: TinyML</h2>
+<p>Historically, Machine Learning happened in the Cloud (Layer 4). Edge AI moved inference to the Fog Gateways (Layer 2/3). The bleeding edge of IoT technology is <strong>TinyML</strong>—moving machine learning inference directly onto the Layer 1 Mist MCU.</p>
+
+<h3>7.1 How TinyML Works</h3>
+<p>You cannot run a 2GB TensorFlow model on an MCU with 256KB of RAM. The model must be compressed using two techniques:</p>
+<ol>
+    <li><strong>Quantization:</strong> Converting 32-bit floating-point numbers in the neural network into 8-bit integers. This drastically shrinks the model size and speeds up math processing, with only a tiny drop in accuracy.</li>
+    <li><strong>Pruning:</strong> Removing neural connections (weights) that have a value close to zero, thinning out the network.</li>
+</ol>
+<p><strong>Use Case:</strong> "Wake Word" detection. An Amazon Echo uses a TinyML model on an ultra-low-power MCU that does nothing but listen for the word "Alexa". Once detected, it triggers the main, high-power CPU to wake up and process the complex speech query.</p>
+
+<hr>
+
+<h2 id="ch4-sec8">8. Real-World Case Studies</h2>
+
+<div class="scenario-box">
+    <h3>Case Study: Smart Agriculture in Kildare</h3>
+    <p><strong>Scenario:</strong> Monitoring a 500-acre stud farm for optimal pasture growth and soil moisture, factoring in the frequent, unpredictable Irish rain.</p>
+    <ul>
+        <li><strong>Sensors:</strong> Digital capacitive soil moisture sensors and analog NPK (Nitrogen, Phosphorus, Potassium) chemical sensors.</li>
+        <li><strong>Power Management:</strong> Nodes are deployed in the soil. They use small photovoltaic (solar) panels coupled with a <strong>0.1% Duty Cycle</strong> (waking up once every 2 hours).</li>
+        <li><strong>Transceiver:</strong> Due to the vast distances and outdoor deployment, the nodes use <strong>LoRaWAN</strong> to communicate with a central Fog Gateway located on the farmhouse roof.</li>
+        <li><strong>Actuation:</strong> If the Fog Gateway detects soil moisture dropping below 20%, it sends a signal to a pneumatic actuator attached to the irrigation system's main valve.</li>
+    </ul>
+</div>
+
+<div class="scenario-box">
+    <h3>Case Study: Industrial Automation (Predictive Maintenance)</h3>
+    <p><strong>Scenario:</strong> Monitoring heavy CNC machinery in a manufacturing plant.</p>
+    <ul>
+        <li><strong>Sensors:</strong> High-frequency 3-axis MEMS accelerometers (measuring vibration) and infrared temperature sensors.</li>
+        <li><strong>Processing (TinyML):</strong> The vibration data is sampled at 10kHz. Sending this via wireless networks would kill the battery instantly. Instead, an ARM Cortex-M4 MCU on the sensor runs a <em>TinyML anomaly detection model</em>. </li>
+        <li><strong>Transmission:</strong> The sensor stays completely silent until the TinyML model detects a vibration frequency indicating a dying bearing. It then wakes up the <strong>BLE transceiver</strong> and sends a high-priority interrupt to the factory Edge Gateway.</li>
+    </ul>
+</div>
+
+<hr>
+
+<h2 id="ch4-sec9">9. Exam Masterclass: Model Answers & Scenarios</h2>
+
+<div class="model-answer">
+    <h3>University Exam Question (20 Marks)</h3>
+    <p><em>"You are tasked with designing the Perception layer for a remote, wide-area forest fire detection system. The devices will be deployed via drone drop and cannot be physically accessed again. Detail the architecture of your IoT node, specifically addressing your choices for the Sensor, MCU processing, Transceiver, and Power Management strategy to ensure a 10-year lifespan."</em></p>
+    
+    <h4>Model Answer Guide:</h4>
+    <p><strong>1. Introduction (3 Marks):</strong> Acknowledge the core constraints: Extreme remoteness, impossibility of battery replacement, and need for wide-area coverage.</p>
+    
+    <p><strong>2. Sensor Selection (4 Marks):</strong> Propose a multi-sensor array for redundancy and accuracy. Use a low-power digital temperature/humidity sensor (e.g., DHT22) combined with a passive infrared (PIR) sensor or particulate matter (smoke) sensor. Explain that using multiple sensor types prevents "Byzantine faults" (e.g., a false alarm from a broken temperature sensor, when no smoke is present).</p>
+    
+    <p><strong>3. MCU & Processing Strategy (4 Marks):</strong> Select an ultra-low-power MCU (like an ARM Cortex-M0+). The MCU will run a Real-Time Operating System (RTOS). To preserve power, the MCU will not stream data. It will utilize local threshold logic: it will only transition from deep sleep to active mode to transmit a packet if the temperature rapidly spikes by 10 degrees in 5 minutes, or smoke is detected.</p>
+    
+    <p><strong>4. Transceiver (4 Marks):</strong> Wi-Fi and BLE are completely inadequate due to range limitations (few meters). Cellular (4G) is too power-hungry. You must explicitly select <strong>LoRaWAN</strong> or <strong>NB-IoT</strong>, justifying that it provides multi-kilometer range through dense foliage while maintaining ultra-low power consumption.</p>
+    
+    <p><strong>5. Power Management (5 Marks):</strong> This is the most critical section. Explain that the node will operate on an aggressive <strong>Duty Cycle</strong> (< 0.1%), spending 99.9% of its life in Deep Sleep mode (drawing micro-amps), only waking up every 30 minutes for a microsecond sensor check. Furthermore, incorporate an <strong>Energy Harvesting</strong> module, specifically a small solar panel trickling charge into a super-capacitor, to guarantee the 10-year lifespan without manual battery replacement.</p>
+</div>
+
+<div class="model-answer">
+    <h3>University Exam Question (10 Marks)</h3>
+    <p><em>"Explain the role of ADC and DAC components in an IoT node, and describe how 'Resolution' and 'Sampling Rate' impact the performance and resource constraints of the device."</em></p>
+    
+    <h4>Model Answer Guide:</h4>
+    <p><strong>ADC/DAC Roles (4 Marks):</strong> Define ADC (Analog-to-Digital Converter) as the bridge translating continuous physical phenomena (like a smooth voltage curve from a temperature sensor) into discrete binary numbers that the digital MCU can process. Define DAC (Digital-to-Analog Converter) as the reverse: taking binary MCU commands and converting them into continuous voltages to drive analog actuators (like adjusting a motor's speed).</p>
+    <p><strong>Resolution (3 Marks):</strong> Define resolution as the number of bits used to represent the analog value (e.g., 10-bit vs. 12-bit). Explain the trade-off: A 12-bit ADC provides higher accuracy (finer granularity of temperature readings), but generates larger data payloads, requiring more RAM and transmission bandwidth, thus draining the battery faster.</p>
+    <p><strong>Sampling Rate (3 Marks):</strong> Define as how often the analog signal is measured per second (Hz). A high sampling rate captures rapid environmental changes (vital for vibration sensors) but keeps the MCU in 'Active Mode' longer, consuming significant power. Proper system design requires balancing Nyquist theorem requirements with strict power conservation.</p>
+</div>
+<div class="chapter-nav"><a href="chapter-3.html" class="prev"><span class="label">← Previous</span><span class="title">Ch 3: OpenFog Architecture & NIST Standards</span></a>
+<a href="chapter-5.html" class="next"><span class="label">Next →</span><span class="title">Ch 5: Communication Protocols & Network Technologies</span></a></div>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+// Theme toggle
+function toggleTheme(){
+  const d=document.documentElement;
+  const t=d.getAttribute('data-theme')==='dark'?'':'dark';
+  d.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';
+}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+// Back to top
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open')));
+</script>
+</body>
+</html>

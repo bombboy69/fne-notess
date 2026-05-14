@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch 12: 50-Mark System Design Scenario Masterclass — Fog & Edge Computing Master Textbook</title>
+<meta name="description" content="Ch 12: 50-Mark System Design Scenario Masterclass - Complete university-level textbook on Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class=""><span class="ch-num">🏠</span> Home</a>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html" class="active"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">Chapter 12</span>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+<h1>Chapter 12: 50-Mark System Design Scenario Masterclass</h1>
+<p style="text-align:center; font-style:italic; font-size:1.4em; color:#64748b;">The Ultimate University Exam Preparation Guide</p>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#ch12-sec1">1. The Anatomy of a 50-Mark Question</a></li>
+        <li><a href="#ch12-sec2">2. The 6-Step Master Framework</a></li>
+        <li><a href="#ch12-sec3">3. Scenario 1: Smart Agriculture (Precision Farming)</a></li>
+        <li><a href="#ch12-sec4">4. Scenario 2: Connected Ambulance & Healthcare</a></li>
+        <li><a href="#ch12-sec5">5. Scenario 3: Industry 4.0 (Predictive Maintenance)</a></li>
+        <li><a href="#ch12-sec6">6. Scenario 4: Autonomous Vehicles (V2X)</a></li>
+        <li><a href="#ch12-sec7">7. Scenario 5: Smart City & Surveillance</a></li>
+        <li><a href="#ch12-sec8">8. Scenario 6: Smart Grid & Energy Management</a></li>
+        <li><a href="#ch12-sec9">9. Common Pitfalls & Examiner Red Flags</a></li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<h2 id="ch12-sec1">1. The Anatomy of a 50-Mark Question</h2>
+<p>In advanced university modules on Fog and Edge Computing, the final exam heavily pivots around a massive 50-mark system design question. This question tests your ability to synthesize everything you have learned: networking protocols, computing paradigms, security, power management, and architectural hierarchies.</p>
+<p><strong>The Prompt Format:</strong> You will be presented with a complex, real-world problem (e.g., tracking autonomous fleets, monitoring 10,000 acres of farmland, or executing remote surgery). You must architect a complete end-to-end solution.</p>
+
+<div class="rubric">
+    <h4>Standard Marks Distribution (The Rubric)</h4>
+    <ul>
+        <li><strong>Part A (10 Marks):</strong> Justify the use of Fog/Edge over a pure Cloud architecture.</li>
+        <li><strong>Part B (10 Marks):</strong> Draw and explain the layered physical/logical architecture.</li>
+        <li><strong>Part C (10 Marks):</strong> Map and justify Network and Application Layer protocols.</li>
+        <li><strong>Part D (10 Marks):</strong> Detail data aggregation, filtering, and compute offloading strategies.</li>
+        <li><strong>Part E (10 Marks):</strong> Identify security threats, mitigations, and explicitly state engineering assumptions.</li>
+    </ul>
+</div>
+
+<!-- SECTION 2 -->
+<h2 id="ch12-sec2">2. The 6-Step Master Framework</h2>
+<p>Do not panic when you read a complex scenario. Apply this exact 6-step framework to systematically harvest every single mark from the grading rubric.</p>
+
+<div class="deep-dive">
+    <ol>
+        <li><strong>The BLURS Justification:</strong> Always start by proving Cloud-only fails using the BLURS acronym (Bandwidth, Latency, Uninterrupted transmission, Resource constraints, Security). Specifically tailor the acronym to the prompt.</li>
+        <li><strong>The 4-Tier Diagram:</strong> Mentally map out the Mist (Sensors), Edge (Gateways), Fog (Regional/ISP nodes), and Cloud layers. You MUST draw this physically on your exam paper.</li>
+        <li><strong>The Protocol Elimination Game:</strong> Never just state a protocol; state why the alternatives fail. (e.g., "I choose LoRaWAN. Wi-Fi fails due to short range, and 4G fails due to extreme battery drain.")</li>
+        <li><strong>The Fractional Selectivity Rule:</strong> Explain exactly *what* data is dropped at the edge. Do not just say "data is filtered." Say: "The sensor samples at 100Hz. The edge gateway calculates a 1-minute moving average and only sends a single 10-byte MQTT payload to the cloud if the threshold is breached."</li>
+        <li><strong>The STRIDE Security Model:</strong> Pick two specific threats (e.g., Physical Tampering and MITM attacks) and map them to hardware (TPM/Secure Boot) and software (DTLS/mTLS) defenses.</li>
+        <li><strong>Explicit Assumptions:</strong> Examiners give marks for acknowledging what you don't know. Always state: "I assume sensors are battery-operated," or "I assume the edge gateway has continuous mains power."</li>
+    </ol>
+</div>
+
+<!-- SECTION 3 -->
+<h2 id="ch12-sec3">3. Scenario 1: Smart Agriculture (Precision Farming)</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A national agricultural conglomerate manages a 10,000-acre smart farm. They wish to deploy sensors to monitor soil moisture, NPK (nutrient) levels, and micro-climates. Actuators will control localized irrigation valves. The farm is highly remote with no broadband internet access and no power grid across the fields. Design an end-to-end IoT, Fog, and Cloud architecture to fully automate this farm."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <p>A pure Cloud-centric solution is inadequate due to the <strong>BLURS</strong> challenges:</p>
+    <ul>
+        <li><strong>Uninterrupted Transmission:</strong> The farm is highly remote. If the system relies entirely on a centralized cloud to trigger the irrigation valves, a drop in the fragile WAN connection would result in crops dying. A local Fog gateway ensures autonomous, uninterrupted actuation even when offline.</li>
+        <li><strong>Bandwidth & Cost:</strong> Sending raw soil telemetry from 50,000 sensors continuously via cellular/satellite to AWS is prohibitively expensive. Fog computing aggregates this locally, reducing WAN bandwidth by 99%.</li>
+        <li><strong>Resource Constraints:</strong> Soil sensors must run on batteries for years. They cannot sustain the heavy TCP connections required to talk directly to a Cloud server.</li>
+    </ul>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (AWS/Azure)</span>
+  - Global Crop Yield Analytics, Long-term Storage
+  - Machine Learning Training (e.g., predicting blight)
+           ^
+           | (Satellite / 4G Cellular Backhaul)
+           v
+<span class="layer">LAYER 3 & 2: FOG / EDGE TIER (Farmhouse Gateway)</span>
+  - Ruggedized Industrial PC mounted on the main farmhouse roof.
+  - Functions: Protocol translation, Edge AI (running local irrigation models), 
+    and offline database caching.
+           ^
+           | (Sub-GHz Wireless Network)
+           v
+<span class="layer">LAYER 1: MIST / PERCEPTION TIER (The Field)</span>
+  - Devices: Soil Moisture Sensors, NPK Sensors, Weather Anemometers.
+  - Actuators: Solenoid valves on the irrigation pipes.
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <ul>
+        <li><strong>Perception to Edge (Network/Link):</strong> I select <strong>LoRaWAN (Class A)</strong>. 
+            <br><em>Justification:</em> Wi-Fi and BLE fail entirely due to the massive 10,000-acre range. NB-IoT fails because the farm is remote with no cell towers. LoRaWAN operates in the Sub-GHz ISM band, easily penetrating dense wet crop canopies up to 15km. Class A is chosen for maximum battery savings. <em>For Actuators:</em> I select <strong>LoRaWAN Class B</strong> to ensure predictable latency for opening valves.</li>
+        <li><strong>Edge to Cloud (Application/Transport):</strong> I select <strong>MQTT over TCP</strong>.
+            <br><em>Justification:</em> The Gateway has continuous power. It uses MQTT to securely and reliably publish aggregated daily reports to the Cloud Broker over the satellite backhaul.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>The sensors operate on an aggressive <strong>Duty Cycle</strong> (0.1%), waking up once an hour to sample moisture. The raw analog signals are converted via ADC and transmitted as a tiny 12-byte payload to the Fog Gateway.</p>
+    <p>The Fog Gateway executes <strong>Fractional Selectivity</strong>. Instead of sending every hourly reading to AWS, it calculates a daily moving average. It utilizes a local Edge AI inference model (TinyML) to predict drought conditions. It only sends a single 1KB daily summary report to the cloud. However, if moisture drops below a critical 15% threshold, the Gateway autonomously actuates the local solenoid valve to water the specific grid.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> Physical sensors in an open field are vulnerable to tampering (Node-level attack). Unencrypted radio waves are vulnerable to spoofing (injecting false moisture data to flood the farm).</li>
+        <li><strong>Mitigations:</strong> The LoRaWAN MAC payload will be encrypted using <strong>AES-128</strong> symmetric keys to ensure data confidentiality. The Gateway will employ <strong>Secure Boot</strong> and a Hardware Root of Trust (TPM) to ensure an attacker cannot physically extract the AWS cloud keys.</li>
+        <li><strong>Assumptions:</strong> I assume the sensors rely on coin-cell batteries paired with small photovoltaic (solar) energy harvesters. I assume the main farmhouse gateway has access to continuous mains power and a satellite dish.</li>
+    </ul>
+</div>
+
+<!-- SECTION 4 -->
+<h2 id="ch12-sec4">4. Scenario 2: Connected Ambulance & Healthcare</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A smart city hospital requires a 'Connected Ambulance' system. When paramedics treat a patient in transit, high-definition ultrasound video, ECG streams, and vital signs must be processed in real-time to allow automated triage and remote surgical guidance from doctors at the hospital. Design the architecture."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <ul>
+        <li><strong>Latency:</strong> Remote surgical guidance and automated triage cannot tolerate the >100ms latency of a remote cloud data center. Sub-millisecond latency is required for life-critical feedback loops. Fog nodes placed at the network edge provide this.</li>
+        <li><strong>Mobility:</strong> Edge computing alone fails here. As the ambulance drives at 100 km/h across the city, an Edge architecture (relying on local Wi-Fi) would constantly drop. <strong>Fog Computing</strong>, integrated into the cellular infrastructure, supports seamless mobility and session hand-off between cell towers.</li>
+        <li><strong>Privacy:</strong> Routing unencrypted patient data to a public cloud violates HIPAA/GDPR. Fog nodes allow data to be processed and anonymized locally within the telecom provider's secure network.</li>
+    </ul>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (Hospital Private Cloud)</span>
+  - Electronic Health Records (EHR), Historical Patient Analytics.
+           ^
+           | (Secure IPsec VPN)
+           v
+<span class="layer">LAYER 3: FOG TIER (5G MEC Base Stations)</span>
+  - Multi-access Edge Compute (MEC) servers located at cellular towers.
+  - Runs heavy Video Analytics and AI Triage algorithms locally.
+           ^
+           | (5G URLLC - Ultra Reliable Low Latency Comm)
+           v
+<span class="layer">LAYER 2: EDGE TIER (Ambulance On-board Gateway)</span>
+  - Aggregates all sensor data inside the vehicle.
+           ^
+           | (Wi-Fi 6 / Bluetooth 5.0)
+           v
+<span class="layer">LAYER 1: MIST / PERCEPTION TIER (Patient)</span>
+  - ECG monitors, Portable Ultrasound wands, Blood oxygen sensors.
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <ul>
+        <li><strong>Perception to Edge:</strong> <strong>Bluetooth Low Energy (BLE)</strong> for wearable vitals (low power, sufficient range inside the vehicle). <strong>Wi-Fi 6</strong> for the portable Ultrasound wand to handle the high bandwidth of HD video.</li>
+        <li><strong>Edge to Fog (Network):</strong> <strong>5G URLLC</strong>. 4G LTE is insufficient for the strict latency and reliability requirements of remote medical guidance.</li>
+        <li><strong>Edge to Fog (Application):</strong> <strong>MQTT over TCP (QoS 2)</strong> for vital signs to guarantee exactly-once delivery (preventing missed heartbeats). <strong>UDP/RTP</strong> for the live ultrasound video feed, as TCP retransmissions would cause unacceptable video lag.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>Using the <strong>Compute Offloading Pattern</strong>: The portable ultrasound wand lacks the GPU power to run AI anomaly detection. It offloads the raw video feed to the 5G MEC Fog Node (Tier 3). The Fog node runs a deep learning model to instantly identify internal bleeding. It sends a compressed, semantic alert (e.g., "Rupture detected at X:Y coordinates") back to the paramedic's tablet, and simultaneously forwards the anonymized triage priority to the hospital Cloud.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> Man-in-the-Middle (MITM) attacks intercepting ePHI (Electronic Protected Health Information), violating HIPAA.</li>
+        <li><strong>Mitigations:</strong> The system will enforce <strong>Zero Trust</strong> and <strong>Mutual TLS (mTLS)</strong>. The ambulance gateway and the Fog node will cryptographically authenticate each other. All MQTT vital sign payloads will be encrypted using AES-256 (Data in Motion).</li>
+        <li><strong>Assumptions:</strong> I assume the city has contiguous 5G coverage. I assume the ambulance gateway is powered by the vehicle's alternator, allowing high-power computations.</li>
+    </ul>
+</div>
+
+<!-- SECTION 5 -->
+<h2 id="ch12-sec5">5. Scenario 3: Industry 4.0 (Predictive Maintenance)</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A manufacturing plant relies on 50 massive robotic welding arms. A breakdown costs $50,000 per minute. Currently, the arms run on legacy PLC controllers (Modbus). The company wants to implement AI-driven Predictive Maintenance to detect bearing failures before they happen, without replacing the multi-million dollar robots. Design the architecture."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <ul>
+        <li><strong>Latency:</strong> If an anomaly indicates a robotic arm is about to snap, the system must actuate an emergency shutdown within 5 milliseconds. The physical propagation delay to an AWS server makes Cloud-based actuation impossible.</li>
+        <li><strong>Bandwidth (Viscosity):</strong> High-frequency vibration sensors sample at 20kHz. 50 robots generating 20,000 data points a second will instantly saturate the factory's WAN uplink. Local Edge processing is mandatory to filter this Big Data volume.</li>
+    </ul>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (Azure IoT Central)</span>
+  - Global Digital Twin models, long-term ML training.
+           ^
+           | (Fiber Optic WAN)
+           v
+<span class="layer">LAYER 3: FOG TIER (Factory Micro Data Center / Cloudlet)</span>
+  - On-premise server rack. Orchestrates workloads across the factory.
+           ^
+           | (Time-Sensitive Networking - TSN Ethernet)
+           v
+<span class="layer">LAYER 2: EDGE TIER (Industrial IoT Gateways)</span>
+  - Installed next to each robotic arm. Performs Protocol Translation.
+           ^
+           | (Serial Cables / Private 5G)
+           v
+<span class="layer">LAYER 1: MIST / PERCEPTION TIER</span>
+  - Legacy PLCs (Modbus), new MEMS 3-axis Accelerometers (Vibration).
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <ul>
+        <li><strong>Edge Translation:</strong> The IoT Gateway acts as the bridge. It translates the legacy <strong>Modbus RTU</strong> serial data from the PLCs into modern IP packets.</li>
+        <li><strong>Edge to Fog (Network):</strong> <strong>IEEE 802.1 Time-Sensitive Networking (TSN)</strong>. Standard Ethernet is "best effort." TSN guarantees deterministic, zero-packet-loss communication for the emergency shutdown commands.</li>
+        <li><strong>Application Layer:</strong> The Gateway encapsulates the translated data into <strong>OPC-UA</strong> (the standard for industrial automation) or <strong>MQTT</strong> and publishes it to the local Fog broker.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>We will utilize the <strong>Digital Twin</strong> and <strong>Edge AI</strong> design patterns. <br>The Edge Gateway ingests the raw 20kHz vibration audio. Instead of uploading the audio, the Gateway executes a <strong>Fast Fourier Transform (FFT)</strong> algorithm locally to identify the frequency signature of a failing bearing. <br>Simultaneously, the Cloud maintains a Digital Twin of the robotic arm. The Cloud ingests the daily summarized insights to predict that the bearing has 4 days of life remaining, allowing maintenance to be scheduled during the weekend shift.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> Stuxnet-style sabotage where a rogue device is plugged into the factory LAN to send false commands to the PLCs.</li>
+        <li><strong>Mitigations:</strong> The network will employ <strong>Network Access Control (802.1X)</strong> and <strong>Micro-segmentation</strong>. The robotic arms will be placed on an isolated VLAN. The Edge Gateways will utilize <strong>Secure Boot</strong> to ensure malware cannot be loaded onto the translation bridge.</li>
+        <li><strong>Assumptions:</strong> I assume the factory floor has severe electromagnetic interference (EMI), hence the reliance on shielded TSN Ethernet rather than Wi-Fi for critical paths.</li>
+    </ul>
+</div>
+
+<!-- SECTION 6 -->
+<h2 id="ch12-sec6">6. Scenario 4: Autonomous Vehicles (V2X)</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A logistics company is deploying a fleet of autonomous semi-trucks that will use 'Platooning' (driving 1 meter apart at high speeds to reduce aerodynamic drag). The trucks must instantly share braking data, while also routing video feeds to a central control center for AI monitoring. Design the V2X (Vehicle-to-Everything) architecture."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <p>In autonomous platooning, if the lead truck brakes, the trailing truck must apply brakes in less than 2 milliseconds to avoid a lethal collision. The RTT (Round Trip Time) to a Cloud server is physically too slow. Furthermore, trucks operate in <strong>Variable Connectivity</strong> environments (tunnels, rural highways). They must possess <strong>Edge Native autonomous operation</strong> to maintain the platoon safely even when completely disconnected from the Internet.</p>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (Fleet Management Center)</span>
+  - Global route optimization, fleet analytics, video storage.
+           ^
+           | (4G / 5G Cellular)
+           v
+<span class="layer">LAYER 3: FOG TIER (Roadside Units - RSUs)</span>
+  - Compute nodes mounted on highway gantries and cell towers.
+  - Provides local weather / traffic updates to the platoon.
+           ^
+           | (C-V2X / 5G)
+           v
+<span class="layer">LAYER 2: EDGE TIER (Truck On-board Computer - OBC)</span>
+  - Heavy GPU-enabled Edge server inside the truck cab.
+           ^
+           | (CAN bus / Automotive Ethernet)
+           v
+<span class="layer">LAYER 1: MIST / PERCEPTION TIER (The Truck)</span>
+  - LiDAR, Radar, 4K Cameras, Brake Actuators.
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <ul>
+        <li><strong>V2V (Vehicle-to-Vehicle) Protocol:</strong> <strong>C-V2X (Cellular V2X)</strong> or <strong>DSRC (Dedicated Short-Range Communications - 802.11p)</strong>. These protocols allow the trucks to communicate directly peer-to-peer (P2P) bypassing the cellular tower entirely for sub-millisecond brake signaling.</li>
+        <li><strong>V2I (Vehicle-to-Infrastructure):</strong> The trucks use <strong>5G</strong> to connect to the Fog Roadside Units to receive localized traffic light timing.</li>
+        <li><strong>Application Layer:</strong> Video feeds are streamed to the Cloud using <strong>UDP</strong>. Telemetry is sent via <strong>MQTT (QoS 1)</strong> to ensure location data is not lost.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>The system utilizes the <strong>Federated Learning</strong> pattern. The raw LiDAR and video data generated (Terabytes per hour) is <em>never</em> sent to the cloud. The On-board Computer (Edge) processes the LiDAR locally to drive the truck. Overnight, the truck trains a local ML model on the day's driving anomalies. It only uploads the <em>model weights/updates</em> (a few Megabytes) to the Cloud. The Cloud aggregates the weights from the whole fleet and pushes a smarter Master Model back to the trucks.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> A <strong>Replay Attack</strong> or Spoofing, where a hacker on the highway injects a fake "BRAKE NOW" V2V command, causing a massive pile-up.</li>
+        <li><strong>Mitigations:</strong> V2V communications will be protected using cryptographic signatures with <strong>Timestamps and Nonces</strong>. If the receiving truck sees a command with a timestamp from 5 seconds ago, it drops the packet, defeating the replay attack.</li>
+        <li><strong>Assumptions:</strong> I assume the trucks have massive localized power via their alternators, removing any battery constraints on the Edge GPUs.</li>
+    </ul>
+</div>
+
+<!-- SECTION 7 -->
+<h2 id="ch12-sec7">7. Scenario 5: Smart City & Surveillance</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A metropolis is deploying a Smart City infrastructure including 5,000 smart parking meters (battery-powered) and 1,000 high-definition PTZ security cameras on lampposts. The city requires real-time automated detection of traffic accidents and parking availability tracking. Design a unified architecture to handle these wildly different data profiles."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <p>This scenario requires handling the <strong>Variety</strong> and <strong>Volume</strong> of IoT Big Data. Streaming 1,000 4K video feeds directly to a centralized Cloud server will cause a catastrophic <strong>Bandwidth</strong> bottleneck and incur astronomical ingress fees. Fog computing solves this by distributing the heavy video analytics across regional network nodes, filtering the data before it hits the WAN.</p>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (City Hall Data Center)</span>
+  - City-wide Dashboards, Long-term evidential video storage.
+           ^
+           | (Fiber Backbone)
+           v
+<span class="layer">LAYER 3: FOG TIER (Neighborhood ISP Hubs)</span>
+  - Aggregates data from specific city districts. Runs heavy Video AI.
+           ^
+           |
+    +------+-------+
+    |              |
+<span class="layer">LAYER 2: EDGE</span>  <span class="layer">LAYER 2: EDGE</span>
+(Camera CPU)     (Parking Gateway)
+    |              |
+<span class="layer">LAYER 1: MIST</span>  <span class="layer">LAYER 1: MIST</span>
+(Image Sensor)   (Magnetic Sensor)
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <p>This requires a <strong>Heterogeneous Network</strong> approach:</p>
+    <ul>
+        <li><strong>The Parking Meters (Constrained):</strong> I select <strong>NB-IoT</strong>. The meters are buried in concrete streets. NB-IoT operates on licensed Sub-GHz spectrum, providing excellent deep-urban penetration and guaranteed QoS without interference. It allows the meters to sleep for 23 hours, ensuring 10-year battery life. CoAP over UDP is used to minimize overhead.</li>
+        <li><strong>The Cameras (Unconstrained):</strong> I select <strong>Gigabit Ethernet / Fiber</strong> or <strong>5G</strong>. Cameras require massive throughput and continuous mains power. RTSP (Real-Time Streaming Protocol) over TCP is used to ensure high-fidelity frame delivery to the Fog nodes.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>We apply the <strong>Edge AI</strong> pattern. Instead of sending raw video, the camera's internal CPU (Edge) or the lamppost router (Tier 1 Fog) runs a YOLO (You Only Look Once) object detection model. It analyzes the frames locally. If it detects a car crash, it sends a tiny JSON payload (e.g., `{"event": "crash", "location": "Main St"}`) and a 5-second video clip to City Hall. 99% of empty video frames (nothing happening) are immediately deleted at the edge, saving petabytes of bandwidth.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> Physical tampering of parking meters and privacy violations (unlawful tracking of citizens' faces/license plates).</li>
+        <li><strong>Mitigations:</strong> The Edge AI models will employ <strong>Privacy-by-Design</strong> (GDPR compliance). Faces and license plates are blurred <em>at the Edge</em> before any video is transmitted to the Cloud. Parking meters will use <strong>Tamper-responsive circuits</strong> to wipe memory if opened.</li>
+        <li><strong>Assumptions:</strong> I assume the city has existing cellular infrastructure to support NB-IoT without building custom LoRaWAN gateways.</li>
+    </ul>
+</div>
+
+<!-- SECTION 8 -->
+<h2 id="ch12-sec8">8. Scenario 6: Smart Grid & Energy Management</h2>
+
+<div class="model-answer">
+    <h4>Prompt:</h4>
+    <p><em>"A utility company is upgrading a regional power grid to include 100,000 smart meters in residential homes and distributed solar micro-grids. The system must balance load dynamically and detect power outages instantly to reroute electricity. The system spans hundreds of miles. Design the architecture."</em></p>
+    
+    <hr>
+    
+    <h4>A) Justification for Fog over Cloud (10 Marks)</h4>
+    <p>The power grid requires <strong>Geographical Distribution</strong> and <strong>Sub-millisecond Latency</strong>. If a localized power surge occurs, the grid must autonomously trip breakers to prevent cascading blackouts. The RTT to the cloud is too slow to stop a grid collapse. Furthermore, Fog supports <strong>Geographical Aggregation</strong>—calculating power demands on a neighborhood-by-neighborhood basis rather than overwhelming a central server.</p>
+
+    <h4>B) Architectural Diagram & Components (10 Marks)</h4>
+    <div class="diagram-box">
+<span class="layer">LAYER 4: CLOUD TIER (Utility Provider Headquarters)</span>
+  - Global billing, macroeconomic grid forecasting.
+           ^
+           | (Secure Fiber / Cellular)
+           v
+<span class="layer">LAYER 3: FOG TIER (Substation Routers)</span>
+  - Industrial servers placed at electrical substations.
+  - Balances load for specific neighborhoods autonomously.
+           ^
+           | (Wi-SUN / RF Mesh)
+           v
+<span class="layer">LAYER 2: EDGE TIER (Smart Meter in Home)</span>
+  - Acts as a local gateway for the homeowner's devices.
+           ^
+           | (Zigbee / Matter)
+           v
+<span class="layer">LAYER 1: MIST / PERCEPTION TIER (Home Appliances)</span>
+  - Solar inverters, Smart HVAC, EV Chargers.
+    </div>
+
+    <h4>C) Protocol & Standard Mapping (10 Marks)</h4>
+    <ul>
+        <li><strong>Home to Meter (HAN - Home Area Network):</strong> <strong>Zigbee</strong> or <strong>Thread</strong>. The meter acts as the Zigbee Coordinator, communicating with the home's smart HVAC to monitor appliance-level load.</li>
+        <li><strong>Meter to Substation (NAN - Neighborhood Area Network):</strong> <strong>Wi-SUN (Wireless Smart Utility Network)</strong> or an <strong>IPv6 RF Mesh</strong>. Since houses are close together, a mesh topology allows meters to bounce signals off each other back to the substation, ensuring extreme resilience if one path fails.</li>
+        <li><strong>Application Layer:</strong> <strong>MQTT (QoS 2)</strong>. Billing data is financial data. It must be delivered exactly once to prevent double-billing a customer.</li>
+    </ul>
+
+    <h4>D) Data Aggregation & Compute Strategy (10 Marks)</h4>
+    <p>The Smart Meter (Edge) aggregates the home's second-by-second energy usage into a 15-minute moving average for the billing cloud. <br>The Substation (Fog) performs real-time <strong>Distributed Analytics</strong>. If the Substation detects that neighborhood energy demand is exceeding supply, it sends an immediate multicast command to all connected smart meters to temporarily throttle EV chargers and HVAC systems (Demand Response), balancing the grid without Cloud intervention.</p>
+
+    <h4>E) Security & Assumptions (10 Marks)</h4>
+    <ul>
+        <li><strong>Security Threats:</strong> A nation-state cyberattack (Botnet) attempting to send a synchronized "shut down" command to 100,000 meters to collapse the national grid.</li>
+        <li><strong>Mitigations:</strong> The system will utilize a strict <strong>Public Key Infrastructure (PKI)</strong> and <strong>Secure Boot</strong>. Every meter contains a TPM. Commands from the Substation must be digitally signed. If a hacker attempts to inject a shutdown command, the meter's TPM verifies the signature, detects it is forged, and drops the packet.</li>
+        <li><strong>Assumptions:</strong> I assume the smart meters draw power directly from the mains grid, completely eliminating battery constraint concerns.</li>
+    </ul>
+</div>
+
+<!-- SECTION 9 -->
+<h2 id="ch12-sec9">9. Common Pitfalls & Examiner Red Flags</h2>
+
+<div class="exam-tip">
+    <h4>Avoid These Mistakes to Secure Your 90+ Score</h4>
+    <ul>
+        <li><strong>The "Magic Cloud" Fallacy:</strong> Do not just draw an arrow from a battery-powered sensor straight to the "Cloud." You will lose marks. You must explicitly bridge the physical and IP layers using an Edge Gateway.</li>
+        <li><strong>Ignoring the Iron Triangle:</strong> Never specify Wi-Fi for a sensor deployed in a massive forest. Never specify LoRaWAN for streaming 4K video. If you violate the laws of physics regarding Range vs. Bandwidth vs. Power, the examiner will penalize you heavily.</li>
+        <li><strong>TCP for Sleepy Nodes:</strong> Do not specify MQTT (TCP) for a sensor that sleeps for 24 hours and wakes up to send 10 bytes over a lossy connection. You must use CoAP (UDP) or explicitly justify why the TCP handshake overhead is acceptable in your specific scenario.</li>
+        <li><strong>Forgetting to Fail:</strong> Hardware dies. Networks drop. Always explicitly design for the offline state. Use the phrase <em>"Autonomous Edge Operation"</em> to describe how your system handles a severed WAN connection.</li>
+        <li><strong>Skipping Assumptions:</strong> The prompt never gives you all the information. If you aren't sure if the scenario has power cables, <em>state your assumption</em>. ("I assumed mains power was unavailable, hence the use of solar harvesting"). Examiners reward logical deductive reasoning.</li>
+    </ul>
+</div>
+<div class="chapter-nav"><a href="chapter-11.html" class="prev"><span class="label">← Previous</span><span class="title">Ch 11: Security & Privacy in IoT, Fog & Edge</span></a>
+<span></span></div>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+// Theme toggle
+function toggleTheme(){
+  const d=document.documentElement;
+  const t=d.getAttribute('data-theme')==='dark'?'':'dark';
+  d.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';
+}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+// Back to top
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open')));
+</script>
+</body>
+</html>

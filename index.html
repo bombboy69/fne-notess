@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Fog & Edge Computing Master Textbook</title>
+<meta name="description" content="Home - Complete university-level textbook on Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class="active"><span class="ch-num">🏠</span> Home</a>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">Fog & Edge Computing — Master Textbook</span>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+
+      <div class="hero">
+        <h1>Fog & Edge Computing</h1>
+        <p class="subtitle">The Definitive Master Textbook & University Exam Guide</p>
+        <p style="max-width:700px;margin:0 auto 20px;color:var(--text2)">A comprehensive 12-chapter reference covering IoT architectures, communication protocols, Fog & Edge computing paradigms, security frameworks, simulation tools, and complete exam preparation — designed for MSc-level study and professional certification.</p>
+      </div>
+      <div class="chapter-grid">
+      <div class="chapter-card"><a href="chapter-1.html">
+        <span class="num">01</span>
+        <h3>Foundations of IoT & Big Data Challenges</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-2.html">
+        <span class="num">02</span>
+        <h3>The Compute Continuum</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-3.html">
+        <span class="num">03</span>
+        <h3>OpenFog Architecture & NIST Standards</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-4.html">
+        <span class="num">04</span>
+        <h3>Perception Layer, Sensors, Actuators & IoT Devices</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-5.html">
+        <span class="num">05</span>
+        <h3>Communication Protocols & Network Technologies</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-6.html">
+        <span class="num">06</span>
+        <h3>6LoWPAN, Thread, Matter & IoT Networking</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-7.html">
+        <span class="num">07</span>
+        <h3>Transport & Application Layer Protocols</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-8.html">
+        <span class="num">08</span>
+        <h3>Edge Native, Cloud Native, IoT Gateways & Design Patterns</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-9.html">
+        <span class="num">09</span>
+        <h3>Middleware & Web of Things (WoT)</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-10.html">
+        <span class="num">10</span>
+        <h3>iFogSim Simulation & Fog Modeling</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-11.html">
+        <span class="num">11</span>
+        <h3>Security & Privacy in IoT, Fog & Edge</h3>
+      </a></div>      <div class="chapter-card"><a href="chapter-12.html">
+        <span class="num">12</span>
+        <h3>50-Mark System Design Scenario Masterclass</h3>
+      </a></div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+// Theme toggle
+function toggleTheme(){
+  const d=document.documentElement;
+  const t=d.getAttribute('data-theme')==='dark'?'':'dark';
+  d.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';
+}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+// Back to top
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open')));
+</script>
+</body>
+</html>

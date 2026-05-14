@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch 9: Middleware & Web of Things (WoT) — Fog & Edge Computing Master Textbook</title>
+<meta name="description" content="Ch 9: Middleware & Web of Things (WoT) - Complete university-level textbook on Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class=""><span class="ch-num">🏠</span> Home</a>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html" class="active"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">Chapter 9</span>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+<h1>Chapter 9: Middleware and Web of Things (WoT)</h1>
+<p style="text-align:center; font-style:italic; font-size:1.4em; color:#6B7280;">The Ultimate University Master Textbook & Exam Guide</p>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#ch9-sec1">1. The "Tower of Babel" Problem in IoT</a></li>
+        <li><a href="#ch9-sec2">2. Introduction to IoT Middleware</a></li>
+        <li><a href="#ch9-sec3">3. Architectural Paradigms of Middleware</a></li>
+        <li><a href="#ch9-sec4">4. Commercial Edge Middleware: Azure IoT Edge</a></li>
+        <li><a href="#ch9-sec5">5. The Fragmentation Problem & The Web of Things (WoT)</a></li>
+        <li><a href="#ch9-sec6">6. W3C WoT Architecture: The Thing Description (TD)</a></li>
+        <li><a href="#ch9-sec7">7. Semantic Interoperability and JSON-LD</a></li>
+        <li><a href="#ch9-sec8">8. Device Management: OMA LwM2M</a></li>
+        <li><a href="#ch9-sec9">9. Master Comparison Tables</a></li>
+        <li><a href="#ch9-sec10">10. Real-World Case Studies</a></li>
+        <li><a href="#ch9-sec11">11. Exam Masterclass: 20-Mark Models & Scenarios</a></li>
+    </ul>
+</div>
+
+<h2 id="ch9-sec1">1. The "Tower of Babel" Problem in IoT</h2>
+<p>To understand the absolute necessity of Middleware and the Web of Things, we must first understand the catastrophic fragmentation of the IoT industry. When you purchase a smart lightbulb from Philips, a smart thermostat from Nest, and a smart lock from August, you are purchasing three independent, vertical "silos."</p>
+<p>The Philips bulb speaks Zigbee to a proprietary Philips Hub, which talks HTTP to a proprietary Philips Cloud. The Nest thermostat speaks Weave to the Google Cloud. These devices reside in the same physical room, yet they cannot speak to each other locally. If the internet goes down, your smart home ceases to function because the clouds cannot communicate. In industrial settings (IIoT), this fragmentation is exponentially worse, involving decades-old legacy protocols like Modbus and PROFIBUS alongside modern MQTT sensors.</p>
+<p>This massive lack of interoperability—the inability of heterogeneous systems to exchange and make use of information—is the single greatest barrier to realizing the true potential of the Internet of Things. <strong>Middleware and the Web of Things (WoT) are the engineered solutions to this problem.</strong></p>
+
+<h2 id="ch9-sec2">2. Introduction to IoT Middleware</h2>
+<h3>2.1 What is Middleware?</h3>
+<p>Middleware is broadly defined as "software glue." It is a software layer situated between the operating system/network layer and the application layer. Its primary purpose is to hide the complexity of the underlying hardware, network protocols, and distributed environments from the application developer.</p>
+<p>In the Compute Continuum, Middleware often resides on <strong>Edge Gateways</strong> or <strong>Tier 2 Fog Nodes</strong>.</p>
+
+<h3>2.2 Core Functions of IoT Middleware</h3>
+<p>If an exam asks for the responsibilities of Middleware, you must detail these five pillars:</p>
+<ol>
+    <li><strong>Protocol Translation & Abstraction:</strong> Hides the heterogeneity of protocols. It translates BLE, Zigbee, LoRa, and CoAP into a unified data stream (e.g., standardizing everything into MQTT or HTTP). An application developer only needs to know how to query the Middleware, not how to write Zigbee radio code.</li>
+    <li><strong>Device Management & Discovery:</strong> Automatically detects new sensors coming online, registers them, provisions security certificates, monitors their battery health, and pushes Over-The-Air (OTA) firmware updates.</li>
+    <li><strong>Data Aggregation & Filtering:</strong> Processes raw telemetry. If a vibration sensor generates 10,000 readings a second, the middleware runs Complex Event Processing (CEP) to filter the noise, calculate a moving average, and only forward anomalies to the Cloud.</li>
+    <li><strong>Security and Access Control:</strong> Acts as the local gatekeeper. It authenticates devices, encrypts data in motion (TLS/DTLS), and enforces Role-Based Access Control (RBAC).</li>
+    <li><strong>Semantic Interoperability:</strong> Ensures that when Sensor A sends "Temp: 25" and Sensor B sends "T: 77", the middleware understands that one is Celsius and one is Fahrenheit, mapping both to a unified data model.</li>
+</ol>
+
+<h2 id="ch9-sec3">3. Architectural Paradigms of Middleware</h2>
+<p>Middleware is not a single piece of software; it can be built using different architectural patterns depending on the deployment scenario.</p>
+
+<ul>
+    <li><strong>Service-Oriented Architecture (SOA):</strong> Treats every IoT device or capability as a "Service" accessible via APIs (usually RESTful HTTP). <em>Advantage:</em> Highly standardized and web-friendly. <em>Disadvantage:</em> Synchronous (Request/Response) nature can bottleneck in high-latency IoT networks.</li>
+    <li><strong>Message-Oriented Middleware (MOM):</strong> Uses asynchronous message queues and Publish/Subscribe models (e.g., MQTT, Apache Kafka). <em>Advantage:</em> Highly decoupled. The sender does not need to know if the receiver is online. Excellent for lossy networks.</li>
+    <li><strong>Tuple-Space (Shared Memory):</strong> A decentralized paradigm where nodes write data (tuples) into a shared virtual memory space, and other nodes read from it based on pattern matching. Excellent for distributed Fog networks where no single central broker exists.</li>
+</ul>
+
+<h2 id="ch9-sec4">4. Commercial Edge Middleware: Azure IoT Edge</h2>
+<p>To ground these concepts practically, university curricula heavily focus on commercial implementations. <strong>Azure IoT Edge</strong> by Microsoft is a premier example of containerized Edge Middleware.</p>
+
+<div class="deep-dive">
+    <h3>Azure IoT Edge Architecture</h3>
+    <p>Azure IoT Edge extends cloud analytics and custom business logic to physical edge devices via standard Docker containers. It consists of three primary components:</p>
+    
+    <h4>1. IoT Edge Modules</h4>
+    <p>Modules are the smallest unit of computation in Azure IoT Edge. They are implemented as <strong>Docker-compatible containers</strong>. You can deploy an Azure Stream Analytics module, an Azure Machine Learning module, or your own custom Python code. Because they are containers, they are highly portable and isolated.</p>
+    
+    <h4>2. The IoT Edge Runtime</h4>
+    <p>The Runtime is the actual middleware software installed on the physical gateway device (e.g., a Raspberry Pi or an Industrial PC). It has two main daemons:</p>
+    <ul>
+        <li><strong>Edge Agent:</strong> The orchestrator. It receives deployment manifests from the Azure Cloud, pulls the correct Docker images, starts the modules, and monitors their health. If a module crashes, the Edge Agent restarts it.</li>
+        <li><strong>Edge Hub:</strong> The local communication broker. It acts as a local proxy for the Azure Cloud. Modules communicate with each other through the Edge Hub (using MQTT or AMQP). If the WAN connection to the cloud drops, the Edge Hub caches the data locally. When the connection is restored, it syncs the data, ensuring zero data loss (Autonomous Operation).</li>
+    </ul>
+
+    <h4>3. Module / Device Twins</h4>
+    <p>A "Twin" is a JSON document stored in the cloud that mirrors the state of the physical device or module. It contains <em>Desired Properties</em> (what the cloud wants the device to do) and <em>Reported Properties</em> (what the device says it is currently doing). This allows asynchronous management of devices that might be currently offline.</p>
+</div>
+
+<div class="diagram-box">
+<strong>[AZURE IOT EDGE WORKFLOW]</strong>
+
+<span class="highlight">[ AZURE CLOUD ]</span>
+      |
+ (Deployment Manifest: "Run ML Module V2 & Stream Analytics")
+      |
+<span class="highlight">[ EDGE GATEWAY (Middleware) ]</span>
+  +---------------------------------------------------+
+  |  <span class="highlight">Edge Agent</span>: Pulls images, starts containers      |
+  |                                                   |
+  |  [Custom ML Container] <---> [Analytics Container]|
+  |            ^                        |             |
+  |            v                        v             |
+  |  <span class="highlight">Edge Hub</span> (Local MQTT Broker & Cloud Proxy)       |
+  +---------------------------------------------------+
+             ^
+             | (Raw Telemetry)
+             v
+<span class="highlight">[ DUMB SENSORS (BLE, Modbus, Zigbee) ]</span>
+</div>
+
+<h2 id="ch9-sec5">5. The Fragmentation Problem & The Web of Things (WoT)</h2>
+<p>While Middleware (like Azure IoT Edge) translates protocols at the network edge, we still have a massive problem at the <strong>Application Layer</strong> globally. If you build a smart city app, you have to write custom code for the Siemens API, the Cisco API, and the Philips API.</p>
+
+<p>The World Wide Web Consortium (W3C) recognized this. The Web solved information fragmentation for humans (via HTML and URLs). The W3C created the <strong>Web of Things (WoT)</strong> to solve fragmentation for machines.</p>
+
+<div class="exam-tip">
+    <h4>IoT vs. WoT (Exam Critical)</h4>
+    <p><strong>The Internet of Things (IoT)</strong> is about connecting devices at the Network and Transport layers (IP, TCP, UDP, MQTT, CoAP). It focuses on *how* bytes are moved.</p>
+    <p><strong>The Web of Things (WoT)</strong> is strictly at the Application Layer (Layer 7). It does NOT invent new protocols. Instead, it reuses existing web standards (HTTP, JSON, WebSockets) to provide a unified metadata layer *on top* of IoT. It focuses on *what* the bytes mean.</p>
+</div>
+
+<h2 id="ch9-sec6">6. W3C WoT Architecture: The Thing Description (TD)</h2>
+<p>The cornerstone of the Web of Things is the <strong>Thing Description (TD)</strong>. You can think of a TD as the <code>index.html</code> file for a physical device. It is a central JSON-LD (JSON for Linked Data) document that describes a virtual or physical object.</p>
+
+<p>A Thing Description standardizes a device's capabilities into three distinct interaction affordances:</p>
+<ol>
+    <li><strong>Properties:</strong> The internal state of the Thing. Can be Read-Only (e.g., Current Temperature) or Read/Write (e.g., Target Thermostat Temperature).</li>
+    <li><strong>Actions:</strong> Functions that invoke a physical change or process that takes time to complete (e.g., "Fade light to 50% over 10 seconds", "Unlock Door").</li>
+    <li><strong>Events:</strong> Asynchronous pushes of data from the Thing. Used for alerts or state changes (e.g., "Fire Detected!", "Battery Low").</li>
+</ol>
+
+<div class="diagram-box">
+<strong>[W3C WoT THING DESCRIPTION (JSON-LD EXAMPLE)]</strong>
+
+{
+  <span class="json-key">"@context"</span>: <span class="json-val">"https://www.w3.org/2019/wot/td/v1"</span>,
+  <span class="json-key">"title"</span>: <span class="json-val">"Smart_Lamp_01"</span>,
+  <span class="json-key">"description"</span>: <span class="json-val">"A web-connected LED Lamp"</span>,
+  <span class="json-key">"securityDefinitions"</span>: {
+    <span class="json-key">"basic_sc"</span>: { <span class="json-key">"scheme"</span>: <span class="json-val">"basic"</span> }
+  },
+  <span class="json-key">"security"</span>: [<span class="json-val">"basic_sc"</span>],
+  <span class="json-key">"properties"</span>: {
+    <span class="json-key">"status"</span>: {
+      <span class="json-key">"type"</span>: <span class="json-val">"string"</span>,
+      <span class="json-key">"forms"</span>: [{ <span class="json-key">"href"</span>: <span class="json-val">"http://lamp.local/api/status"</span> }]
+    }
+  },
+  <span class="json-key">"actions"</span>: {
+    <span class="json-key">"toggle"</span>: {
+      <span class="json-key">"description"</span>: <span class="json-val">"Turn the lamp on or off"</span>,
+      <span class="json-key">"forms"</span>: [{ <span class="json-key">"href"</span>: <span class="json-val">"http://lamp.local/api/toggle"</span> }]
+    }
+  },
+  <span class="json-key">"events"</span>: {
+    <span class="json-key">"overheating"</span>: {
+      <span class="json-key">"data"</span>: { <span class="json-key">"type"</span>: <span class="json-val">"number"</span> },
+      <span class="json-key">"forms"</span>: [{ <span class="json-key">"href"</span>: <span class="json-val">"mqtt://broker.local/lamp/overheat"</span> }]
+    }
+  }
+}
+</div>
+<p><em>Notice in the forms above: The TD acts as a directory. It tells the application that to read the status, it must use HTTP. But to listen for an overheating event, it must subscribe to an MQTT broker. The TD unifies disparate protocols seamlessly.</em></p>
+
+<h2 id="ch9-sec7">7. Semantic Interoperability and JSON-LD</h2>
+<p>Interoperability exists on several levels:</p>
+<ul>
+    <li><strong>Technical Interoperability:</strong> Devices can exchange bits over Wi-Fi.</li>
+    <li><strong>Syntactic Interoperability:</strong> Devices agree on the data format (e.g., both use XML or JSON).</li>
+    <li><strong>Semantic Interoperability:</strong> Devices agree on the <em>meaning</em> of the data.</li>
+</ul>
+
+<h3>7.1 Ontologies and JSON-LD</h3>
+<p>If a French device sends `{"température": 25}` and an English device sends `{"temp": 77}`, a standard database will crash. They lack Semantic Interoperability.</p>
+<p>The Web of Things solves this using <strong>JSON-LD (Linked Data)</strong> and <strong>Ontologies</strong>. An ontology is a formal naming and definition of the types, properties, and interrelationships of entities in a particular domain. By using the `@context` tag in JSON-LD, the document points to a universal dictionary on the web. It tells the machine: *"When I say 'temp', I am referring to the exact definition of Temperature as defined by the W3C standard ontology, measured in Celsius."* This allows AI and analytics platforms to automatically ingest data from thousands of different vendors without manual human coding.</p>
+
+<h2 id="ch9-sec8">8. Device Management: OMA LwM2M</h2>
+<p>A critical function of Middleware is Device Management. The Open Mobile Alliance (OMA) created the <strong>Lightweight M2M (LwM2M)</strong> protocol specifically to manage resource-constrained IoT devices over sensor networks.</p>
+
+<h3>8.1 LwM2M Architecture</h3>
+<p>LwM2M is an application layer protocol that sits directly on top of <strong>CoAP (Constrained Application Protocol)</strong>. Because it uses CoAP/UDP, it is incredibly lightweight and perfect for battery-operated sensors over NB-IoT or 6LoWPAN.</p>
+<p>It provides four primary interfaces:</p>
+<ol>
+    <li><strong>Bootstrap Interface:</strong> When a device wakes up for the first time, it contacts a Bootstrap server to get its initial configuration, security keys, and the address of its main management server.</li>
+    <li><strong>Client Registration Interface:</strong> The device registers its presence and capabilities ("I am a water meter, I support temperature and flow reading") with the LwM2M Server.</li>
+    <li><strong>Device Management and Service Enablement Interface:</strong> The Server uses this to read values, reboot the device, or push Over-The-Air (OTA) firmware updates.</li>
+    <li><strong>Information Reporting Interface:</strong> The Server uses CoAP "Observe" to tell the device to push telemetry data only when specific conditions are met (e.g., "Send an update if flow drops below 5L/min").</li>
+</ol>
+
+<h2 id="ch9-sec9">9. Master Comparison Tables</h2>
+
+<table>
+    <caption>Table 1: The Internet of Things (IoT) vs. The Web of Things (WoT)</caption>
+    <tr>
+        <th>Feature</th>
+        <th>Internet of Things (IoT)</th>
+        <th>Web of Things (WoT)</th>
+    </tr>
+    <tr>
+        <td><strong>Primary Focus</strong></td>
+        <td>Network connectivity and hardware integration.</td>
+        <td>Application-level interoperability and semantics.</td>
+    </tr>
+    <tr>
+        <td><strong>OSI Layers</strong></td>
+        <td>Layers 1 through 4 (PHY, MAC, Network, Transport).</td>
+        <td>Layer 7 (Application Layer).</td>
+    </tr>
+    <tr>
+        <td><strong>Key Protocols</strong></td>
+        <td>IPv6, 6LoWPAN, BLE, LoRa, TCP, UDP, MQTT.</td>
+        <td>HTTP, WebSockets, JSON-LD, URIs.</td>
+    </tr>
+    <tr>
+        <td><strong>Analogy</strong></td>
+        <td>Laying down the fiber optic cables and routers.</td>
+        <td>Building websites and search engines on top of the cables.</td>
+    </tr>
+</table>
+
+<h2 id="ch9-sec10">10. Real-World Case Studies</h2>
+
+<div class="scenario-box">
+    <h3>Case Study A: Smart Building Integration (The WoT Solution)</h3>
+    <p><strong>The Problem:</strong> A new hospital is built. The HVAC system is by Honeywell (using BACnet), the lighting is by Philips (using Zigbee), and the security doors are by HID (using proprietary IP). The hospital administrators want a single dashboard to control everything, but the vendors' systems are closed silos.</p>
+    <p><strong>The WoT Middleware Solution:</strong></p>
+    <ul>
+        <li>The engineers deploy an <strong>Edge Gateway</strong> running Middleware on each floor.</li>
+        <li>The Middleware connects to the HVAC, lights, and doors using their native protocols (Protocol Translation).</li>
+        <li>The Middleware generates a <strong>W3C Thing Description (TD)</strong> for every single device. It defines the HVAC as having a `Property` of "Temperature" and an `Action` of "SetTemp". It defines the lighting as having an `Action` of "SetBrightness".</li>
+        <li>The hospital's central dashboard does not need to know BACnet or Zigbee. It simply reads the JSON-LD Thing Descriptions via HTTP and sends unified RESTful commands. The interoperability nightmare is solved.</li>
+    </ul>
+</div>
+
+<div class="scenario-box">
+    <h3>Case Study B: Industrial IoT Predictive Maintenance (Azure IoT Edge)</h3>
+    <p><strong>The Problem:</strong> A remote oil rig has poor satellite internet. Pumps generate massive vibration data. The rig needs cloud-level machine learning to predict failures, but cannot upload the raw data due to bandwidth constraints.</p>
+    <p><strong>The Middleware Solution:</strong></p>
+    <ul>
+        <li>An industrial PC is installed on the rig running <strong>Azure IoT Edge</strong>.</li>
+        <li>Data scientists train a machine learning model in the Azure Cloud. They package the model into a Docker container and push it down to the rig as an <strong>IoT Edge Module</strong>.</li>
+        <li>The Edge Hub brokers data from the pumps directly into the ML container locally. The ML container evaluates the data in real-time. If it detects a failing bearing, it sends a 1KB alert to the Cloud.</li>
+        <li>If the satellite link drops, the Edge Agent continues running the ML module autonomously, ensuring the rig's safety system remains operational offline.</li>
+    </ul>
+</div>
+
+<h2 id="ch9-sec11">11. Exam Masterclass: 20-Mark Models & Scenarios</h2>
+
+<div class="model-answer">
+    <h4>University Exam Question (20 Marks)</h4>
+    <p><em>"The proliferation of heterogeneous IoT devices has led to severe fragmentation, hindering the development of universal smart environments. Critically evaluate how the W3C Web of Things (WoT) architecture addresses this fragmentation. In your answer, detail the structure and purpose of the Thing Description (TD) and explain how JSON-LD achieves semantic interoperability."</em></p>
+    
+    <h5>Model Answer Guide:</h5>
+    <p><strong>1. Introduction & The Problem (4 Marks):</strong> Begin by defining the fragmentation problem (the "Tower of Babel"). Explain that IoT protocols (MQTT, CoAP, BLE) solve network connectivity but fail to provide a unified application layer, resulting in vertical, vendor-locked silos.</p>
+    
+    <p><strong>2. The Web of Things Paradigm (4 Marks):</strong> Contrast IoT and WoT. Explain that WoT does not replace IoT protocols; it sits on top of them. It leverages ubiquitous, universally understood web standards (HTTP, JSON, URIs) to abstract the underlying hardware and network complexity, treating every physical device as a standard web resource.</p>
+    
+    <p><strong>3. The Thing Description (TD) (6 Marks):</strong> Define the TD as the core of WoT—a central metadata document (the index.html of a device). You must break down the three affordances: <strong>Properties</strong> (internal state, e.g., current temperature), <strong>Actions</strong> (commands that take time, e.g., unlocking a door), and <strong>Events</strong> (asynchronous data pushes, e.g., fire alarm). Explain that the TD "forms" section acts as a directory, telling the client exactly which protocol (e.g., CoAP or HTTP) to use to interact with the device.</p>
+    
+    <p><strong>4. Semantic Interoperability & JSON-LD (6 Marks):</strong> Define semantic interoperability as the mutual understanding of the <em>meaning</em> of data, not just the format. Explain that WoT uses JSON-LD (Linked Data). By referencing shared web <strong>Ontologies</strong>, JSON-LD ensures that when two different vendors use the variable "temp", machines can mathematically verify they both mean "Temperature in Celsius" as defined by a global standard. This allows for automated, human-free integration of diverse smart devices.</p>
+</div>
+
+<div class="model-answer">
+    <h4>University Exam Question (15 Marks)</h4>
+    <p><em>"Discuss the architecture of Azure IoT Edge as a commercial middleware solution. Explain the roles of the Edge Agent, Edge Hub, and containerized Modules, highlighting how this architecture supports autonomous operation during WAN disconnections."</em></p>
+    
+    <h5>Model Answer Guide:</h5>
+    <p><strong>1. Architectural Overview (4 Marks):</strong> Define Azure IoT Edge as a middleware platform that extends cloud intelligence to local edge devices. Mention that its core unit of computation is the <strong>Module</strong>, which is implemented as a standard Docker-compatible container, allowing high portability for custom code or Microsoft services (like Stream Analytics).</p>
+    
+    <p><strong>2. Edge Agent (4 Marks):</strong> Describe the Edge Agent as the local orchestrator. Its job is to receive the deployment manifest from the cloud, pull the necessary Docker images, start them, and continuously monitor their health, restarting them if they fail.</p>
+    
+    <p><strong>3. Edge Hub (4 Marks):</strong> Describe the Edge Hub as the local communication proxy and MQTT/AMQP broker. It handles East-West traffic (modules talking to other modules) and North-South traffic (modules talking to the cloud).</p>
+    
+    <p><strong>4. Autonomous Operation (3 Marks):</strong> Explain that the Edge Hub is responsible for surviving disconnections. If the internet drops, the Edge Hub caches the telemetry data locally. Because the modules (like local Machine Learning inference) run as independent containers, they continue processing sensor data and actuating local physical systems safely. When the WAN is restored, the Edge Hub syncs the cached data to the cloud seamlessly.</p>
+</div>
+
+<div class="deep-dive">
+    <h3>Viva / Technical Interview Questions</h3>
+    <ol>
+        <li><strong>Interviewer:</strong> <em>"If MQTT is already an open standard for IoT communication, why do we need the Web of Things (WoT)?"</em><br>
+        <strong>Answer:</strong> "MQTT is a brilliant transport protocol, but it is completely agnostic to the payload. If I subscribe to an MQTT topic, I receive a byte array. I have no idea if those bytes represent temperature, an image, or a string, nor do I know if the temperature is in Fahrenheit or Celsius. MQTT provides <em>Technical Interoperability</em>. The Web of Things sits above MQTT, using the Thing Description and JSON-LD to provide <em>Semantic Interoperability</em>, telling the application exactly what those bytes mean and how to interact with them."</li>
+        <br>
+        <li><strong>Interviewer:</strong> <em>"Explain the difference between LwM2M and standard CoAP."</em><br>
+        <strong>Answer:</strong> "CoAP is the underlying transport protocol—it provides the UDP-based RESTful messaging framework. LwM2M (Lightweight M2M) is a standardized device management architecture that <em>uses</em> CoAP. LwM2M defines the specific server/client roles, the registration process, and the specific object models (e.g., defining exactly what URL path to use to trigger a firmware update). CoAP is the vehicle; LwM2M is the rules of the road for device management."</li>
+    </ol>
+</div>
+<div class="chapter-nav"><a href="chapter-8.html" class="prev"><span class="label">← Previous</span><span class="title">Ch 8: Edge Native, Cloud Native, IoT Gateways & Design Patterns</span></a>
+<a href="chapter-10.html" class="next"><span class="label">Next →</span><span class="title">Ch 10: iFogSim Simulation & Fog Modeling</span></a></div>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+// Theme toggle
+function toggleTheme(){
+  const d=document.documentElement;
+  const t=d.getAttribute('data-theme')==='dark'?'':'dark';
+  d.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';
+}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+// Back to top
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open')));
+</script>
+</body>
+</html>
