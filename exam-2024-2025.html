@@ -52,21 +52,9 @@
 </head>
 <body>
 
-    <aside class="sidebar">
-        <h2>Solution Directory</h2>
-        <ul>
-            <li><a href="#q1">Q1: Advantages of Fog Computing</a></li>
-            <li><a href="#q2">Q2: 50-Mark Scenario - Vital Analytics Ambulance</a></li>
-            <li><a href="#q3">Q3: IoT Gateway Traffic Reduction</a></li>
-            <li><a href="#q4">Q4: Edge Native vs Cloud Native</a></li>
-            <li><a href="#q5">Q5: Web of Things (WoT) TD</a></li>
-            <li><a href="#q6">Q6: Cloudlet Design Pattern</a></li>
-            <li><a href="#q7">Q7: App Layer for Lossy Networks (CoAP)</a></li>
-            <li><a href="#q8">Q8: URLLC 5G Communications</a></li>
-        </ul>
-    </aside>
+    
 
-    <main class="main-content">
+    
         <header>
             <h1>Fog and Edge Computing Solutions</h1>
             <div class="meta">
@@ -77,12 +65,12 @@
         </header>
 
         <section id="q1" class="qna-section">
-            <div class="question-box">
+            <div class="scenario-box">
                 <h3>Question 1 <span class="marks">[20 Marks]</span></h3>
                 <p>As the researchers have discussed in literature, the primary goal of the Fog computing is to reduce the latency and provide faster response time (e.g., for real-time applications). In your own words, discuss any four advantages Fog computing can offer other than just reducing the network latency? Provide an appropriate example/scenario for each advantage to justify your answer.</p>
             </div>
 
-            <div class="answer-box">
+            <div class="model-answer">
                 <h4>Model Answer Overview</h4>
                 <p>While latency reduction is the most cited benefit of moving compute to the edge of the network, Fog Computing provides foundational architectural shifts that solve the "BLURS" (Bandwidth, Latency, Uninterrupted transmission, Resource constraints, Security) challenges. Below are four distinct, critical advantages of Fog computing beyond latency reduction, complete with architectural implications and real-world deployment scenarios.</p>
 
@@ -102,7 +90,7 @@
                 <p><strong>Technical Explanation:</strong> Cloud servers are blind to the localized physical conditions of the devices they manage. Fog computing is inherently geographically distributed. Fog nodes possess <em>Context Awareness</em>—they understand their specific location, local network topology, battery states of nearby sensors, and environmental conditions. This allows them to make highly optimized, localized decisions without relying on global cloud rules.</p>
                 <p><strong>Real-World Scenario:</strong> <em>Smart Grid (Energy Balancing).</em> A national power grid relies on distributed solar panels and smart meters. If a localized cloud cover drops solar output in a specific neighborhood, a cloud server analyzing the national grid might react too slowly. A neighborhood Fog node (located at the local substation) instantly recognizes its specific geographical context and autonomously signals local smart HVAC systems to momentarily reduce power consumption, preventing a localized brownout.</p>
 
-                <div class="diagram-wrapper">
+                <div class="diagram-box">
 <pre>
 <span class="hl">EDGE-TO-CLOUD BANDWIDTH OPTIMIZATION WORKFLOW</span>
 
@@ -133,13 +121,13 @@ RAW DATA (10 GB/s)  =========>  <span class="hl">+-------------------------+</sp
         </section>
 
         <section id="q2" class="qna-section">
-            <div class="question-box">
+            <div class="scenario-box">
                 <h3>Question 2 <span class="marks">[50 Marks]</span></h3>
                 <p>Measuring human vital signs in emergency situations (e.g., armed conflicts, natural disasters, traffic crashes, etc.) becomes a necessity to save people's lives. Wearable IoT sensing devices can provide critical information about a patient's medical condition and help determine priority queue for emergency care. <strong>Vital Analytics (VA)</strong> application targets a comprehensive provision of preliminary medical service delivered via an ambulance. The primary goal of this system is to initiate the identification and treatment of the patient even before the ambulance reaches the hospital. This approach may save precious seconds, which in turn may be crucial for patients.</p>
                 <p><em>Design a complete end-to-end architecture (IoT, Cloud, Fog, Protocols, Security) for this Vital Analytics (VA) Ambulance Emergency System.</em></p>
             </div>
 
-            <div class="answer-box">
+            <div class="model-answer">
                 <h4>Masterclass Model Answer: Vital Analytics (VA) System</h4>
                 <p>This massive system design requires a multi-tiered Compute Continuum architecture to bridge the highly mobile, life-critical environment of an ambulance with the strategic, data-heavy environment of a central hospital.</p>
 
@@ -161,6 +149,7 @@ RAW DATA (10 GB/s)  =========>  <span class="hl">+-------------------------+</sp
 
                 <h5>PART 3: The Fog-Based Solution & Edge Intelligence</h5>
                 <p>A Fog computing architecture pushes intelligence down to the ambulance itself and the localized cellular infrastructure.</
+<div class="chapter-nav"><a href="index.html" class="prev"><span class="label">← Back</span><span class="title">Home</span></a><span></span></div>
     </div>
   </main>
 </div>
