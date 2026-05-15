@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⭐ Important Exam Notes</title>
+<meta name="description" content="⭐ Important Exam Notes - Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class=""><span class="ch-num">🏠</span> Home</a>
+<a href="exam-notes.html" class="active" style="background:var(--primary);color:#fff;border-radius:6px;margin:8px 15px;padding:10px 15px;text-align:center;font-weight:700;border-left:none"><span class="ch-num">⭐</span> Exam Notes</a>
+<div style="border-top:1px solid var(--border);margin:8px 20px;"></div>
+<div style="padding:4px 20px;font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:var(--text2);font-family:var(--font-heading);font-weight:700">📚 Textbook</div>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a>
+<div style="border-top:1px solid var(--border);margin:12px 20px;"></div>
+<div style="padding:4px 20px;font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:var(--text2);font-family:var(--font-heading);font-weight:700">📝 Exam Solutions</div>
+<a href="exam-2023-2024.html"><span class="ch-num">📄</span> 2023–2024 Exam Solutions</a>
+<a href="exam-2024-2025.html"><span class="ch-num">📄</span> 2024–2025 Exam Solutions</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">Important Exam Notes</span>
+      <button class="search-btn" onclick="openSearch()" title="Search (Ctrl+K)">🔍 Search</button>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+
+
+    
+        <header id="intro">
+            <h1>IMPORTANT EXAM NOTES</h1>
+            <p><strong>Master Revision Guide:</strong> Condensed, high-yield materials focused strictly on LO1, LO2, and LO3 scoring criteria. Deep simulator code and niche theoretical architectures have been filtered out to focus on exam-tested system design and analysis.</p>
+        </header>
+
+        <section id="fog-cloud-edge" class="section-card">
+            <h2>1. Fog vs Cloud vs Edge (The Continuum)</h2>
+            <p>This is the foundational paradigm of the module. You must be able to contrast these layers critically in terms of latency, bandwidth, and computational placement.</p>
+            
+            <div class="diagram">
+<span class="hl">[ LAYER 4: CLOUD COMPUTING ]</span>
+Location: Remote Data Centers (AWS, Azure) | Latency: >100ms | Compute: Infinite
+Function: Long-term Big Data storage, heavy ML training, global dashboards.
+
+                             ▲ (WAN / Fiber / Satellite)
+                             ▼
+
+<span class="hl">[ LAYER 3: FOG COMPUTING ]</span>
+Location: Network Infrastructure (ISPs, Cell Towers, Regional Routers)
+Latency: 10ms - 50ms | Compute: High (Server racks)
+Function: Mobility support, geographical aggregation, distributed intelligence.
+
+                             ▲ (LAN / 5G / Ethernet)
+                             ▼
+
+<span class="hl">[ LAYER 2: EDGE COMPUTING ]</span>
+Location: 1-Hop from Device (IoT Gateways, Cloudlets, Smart Routers)
+Latency: 1ms - 10ms | Compute: Moderate
+Function: Protocol translation (BLE to IP), local data filtering, fast actuation.
+
+                             ▲ (PAN / BLE / Zigbee / LoRa)
+                             ▼
+
+<span class="hl">[ LAYER 1: MIST COMPUTING (PERCEPTION) ]</span>
+Location: On-Device (Microcontrollers, Sensors)
+Latency: <1ms | Compute: Extremely Low
+Function: Raw data sensing, basic threshold logic, ADC conversion.
+            </div>
+
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Cloud Computing</th>
+                    <th>Fog Computing</th>
+                    <th>Edge Computing</th>
+                </tr>
+                <tr>
+                    <td><strong>Mobility Support</strong></td>
+                    <td>Limited (Connection drops when moving)</td>
+                    <td><strong>High</strong> (Handles cellular handoffs)</td>
+                    <td>Low (Confined to local Wi-Fi/LAN)</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Processing</strong></td>
+                    <td>Centralized Batch Analytics</td>
+                    <td>Hierarchical / Distributed Analytics</td>
+                    <td>Local Filtering / Immediate Inference</td>
+                </tr>
+                <tr>
+                    <td><strong>Bandwidth Cost</strong></td>
+                    <td>High (Ingress fees for raw data)</td>
+                    <td>Low (Aggregates and compresses data)</td>
+                    <td>Lowest (Filters out noise locally)</td>
+                </tr>
+            </table>
+
+            <div class="exam-tip">
+                <h4>🎯 How to write this in exams</h4>
+                <p><strong>Examiner Keywords:</strong> <span class="keywords">Compute Continuum</span>, <span class="keywords">Distributed Intelligence</span>, <span class="keywords">Geographical Aggregation</span>.</p>
+                <p><strong>Common Mistake:</strong> Confusing Edge and Fog. <em>Edge</em> is highly localized (a gateway in a room). <em>Fog</em> is hierarchical and deeply integrated into the network infrastructure (ISP routers, 5G towers), making Fog far superior for <strong>Mobility Support</strong> (e.g., tracking a connected ambulance across a city).</p>
+            </div>
+        </section>
+
+        <section id="integration" class="section-card">
+            <h2>2. IoT + Fog + Cloud Integration Pipeline</h2>
+            <p>You must illustrate how data transforms as it moves from the physical world to the cloud.</p>
+
+            <div class="diagram">
+<span class="suc">THE DATA AGGREGATION & PROTOCOL WORKFLOW</span>
+
+[SENSORS] ----(Non-IP: Zigbee/BLE)----> [EDGE GATEWAY] ----(IP: MQTT/TCP)----> [CLOUD]
+
+1. <span class="hl">SENSE:</span> Sensor samples vibration at 1000Hz.
+2. <span class="hl">TRANSMIT:</span> Sends raw analog-to-digital data via low-power Zigbee.
+3. <span class="hl">TRANSLATE:</span> Gateway receives Zigbee, strips payload, packages into IP/TCP.
+4. <span class="hl">FILTER (Selectivity):</span> Gateway runs Edge AI (FFT). Drops 99% of normal vibration data.
+5. <span class="hl">AGGREGATE:</span> Creates a 1KB JSON metadata alert: {"status": "bearing_failure"}.
+6. <span class="hl">PUBLISH:</span> Sends alert via MQTT to the Cloud.
+7. <span class="hl">ACTUATE:</span> Cloud updates digital twin; Gateway instantly shuts down the local machine.
+            </div>
+        </section>
+
+        <section id="scenarios" class="section-card">
+            <h2>3. Scenario-Based System Design (The 50-Markers)</h2>
+            <p>This is the most critical section. You will be asked to design an architecture for a specific scenario. Apply this exact structure.</p>
+
+            <h3>Scenario A: Smart Agriculture (Precision Farming)</h3>
+            <ul>
+                <li><strong>The Problem:</strong> 10,000 acres, battery-powered soil sensors, no Wi-Fi, spotty rural internet.</li>
+                <li><strong>Fog Justification (BLURS):</strong> Cloud-only fails due to <em>Uninterrupted Transmission</em> (if rural internet drops, crops die) and <em>Bandwidth</em> (sending raw data from 10k sensors to AWS is too expensive). Fog enables local, offline actuation of irrigation.</li>
+                <li><strong>Protocols:</strong> <strong>LoRaWAN (Class A)</strong> for Sensors to Gateway (Sub-GHz penetrates wet crops up to 15km; Class A maximizes 10-year battery life). <strong>MQTT</strong> from Gateway to Cloud (reliable telemetry delivery).</li>
+                <li><strong>Security:</strong> AES-128 encryption over LoRaWAN. Physical tamper-evident seals on sensors. Secure Boot on the Gateway to protect AWS keys.</li>
+                <li><strong>Assumptions:</strong> Assume gateway has solar+battery backup; sensors run strictly on coin-cells.</li>
+            </ul>
+
+            <h3>Scenario B: Connected Ambulance (Emergency Healthcare)</h3>
+            <ul>
+                <li><strong>The Problem:</strong> Streaming HD ultrasound and ECGs from a moving ambulance to a hospital.</li>
+                <li><strong>Fog Justification:</strong> Cloud fails due to <em>Latency</em> (doctors need sub-millisecond real-time video) and <em>Mobility</em> (Edge Wi-Fi drops when driving). Fog MEC (Multi-access Edge Compute) at 5G cell towers provides seamless handoffs and ultra-low latency.</li>
+                <li><strong>Protocols:</strong> <strong>BLE</strong> for wearable ECGs (low power). <strong>Wi-Fi 6</strong> for HD Ultrasound to onboard router. <strong>5G URLLC</strong> for Gateway to Fog. <strong>UDP</strong> for video (TCP retransmissions would cause lag). <strong>MQTT (QoS 2)</strong> for vitals (cannot drop a heartbeat).</li>
+                <li><strong>Security & GDPR:</strong> mTLS (Mutual TLS) between ambulance and hospital. Edge AI anonymizes patient faces in video before transmission (Privacy by Design).</li>
+            </ul>
+
+            <div class="exam-tip">
+                <h4>🎯 20-Mark Answer Structure Template</h4>
+                <ol>
+                    <li><strong>BLURS Justification:</strong> Prove why the Cloud fails here (Latency, Bandwidth, Offline capability).</li>
+                    <li><strong>4-Tier Architecture:</strong> List Mist (Sensors) &rarr; Edge (Gateway) &rarr; Fog (Regional) &rarr; Cloud.</li>
+                    <li><strong>Protocol Elimination:</strong> "I chose LoRaWAN because Wi-Fi fails on range and 4G fails on battery."</li>
+                    <li><strong>Aggregation Strategy:</strong> State exactly *what* data is dropped at the Edge.</li>
+                    <li><strong>Assumptions:</strong> Always write 1-2 engineering assumptions at the bottom.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="protocols" class="section-card">
+            <h2>4. Protocol Selection Guide (The Iron Triangle)</h2>
+            <p>You cannot have Range, Bandwidth, and Battery Life simultaneously. Protocol selection defines your system.</p>
+
+            <h3>Network Layer: BLE vs LoRaWAN</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>BLE 5.0 (Bluetooth)</th>
+                    <th>LoRaWAN</th>
+                </tr>
+                <tr>
+                    <td><strong>Range</strong></td>
+                    <td>Short (10m - 50m)</td>
+                    <td>Long (Up to 15km outdoors)</td>
+                </tr>
+                <tr>
+                    <td><strong>Bandwidth</strong></td>
+                    <td>High for IoT (~2 Mbps)</td>
+                    <td>Very Low (0.3 kbps - 50 kbps)</td>
+                </tr>
+                <tr>
+                    <td><strong>Use Case</strong></td>
+                    <td>Wearable healthcare, smart home.</td>
+                    <td>Agriculture, smart city meters.</td>
+                </tr>
+            </table>
+
+            <h3>Application Layer: MQTT vs CoAP</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>MQTT</th>
+                    <th>CoAP</th>
+                </tr>
+                <tr>
+                    <td><strong>Transport Base</strong></td>
+                    <td><strong>TCP</strong> (Connection-oriented)</td>
+                    <td><strong>UDP</strong> (Connectionless)</td>
+                </tr>
+                <tr>
+                    <td><strong>Architecture</strong></td>
+                    <td>Publish/Subscribe (Requires Broker)</td>
+                    <td>Client/Server (RESTful: GET/POST)</td>
+                </tr>
+                <tr>
+                    <td><strong>Battery Impact</strong></td>
+                    <td>High (TCP 3-way handshake overhead)</td>
+                    <td>Ultra-Low (Fire-and-forget UDP)</td>
+                </tr>
+                <tr>
+                    <td><strong>Best For...</strong></td>
+                    <td>Reliable networks, continuous power.</td>
+                    <td>Lossy networks (6LoWPAN), battery power.</td>
+                </tr>
+            </table>
+
+            <div class="exam-tip">
+                <h4>🎯 Exam Protocol Cheat Sheet</h4>
+                <p>If prompt says <strong>"Lossy network, battery-powered"</strong> &rarr; Select <strong>CoAP (UDP)</strong> to avoid TCP retransmission storms.<br>
+                If prompt says <strong>"Financial/Medical data, reliable network"</strong> &rarr; Select <strong>MQTT (TCP)</strong> with <strong>QoS 2</strong> (Exactly Once delivery).<br>
+                If prompt says <strong>"City-wide or Farm, battery sensors"</strong> &rarr; Select <strong>LoRaWAN</strong> or <strong>NB-IoT</strong>.</p>
+            </div>
+        </section>
+
+        <section id="advantages" class="section-card">
+            <h2>5. Fog Advantages (Beyond Latency)</h2>
+            <p>If asked for 4 advantages other than latency, use these:</p>
+            <ol>
+                <li><strong>Bandwidth Optimization:</strong> Edge nodes filter and compress raw telemetry, sending only semantic metadata to the cloud, saving massive WAN ingress costs.</li>
+                <li><strong>Uninterrupted Operation (Resilience):</strong> Local fog nodes maintain local databases and control logic. If the internet drops, the factory robotic arms continue to operate safely offline (Edge Autonomy).</li>
+                <li><strong>Context Awareness & Mobility:</strong> Fog nodes situated in telecom cell towers know exactly where a connected car is and can seamlessly hand off the computing session to the next tower as the car drives, which localized Edge Wi-Fi cannot do.</li>
+                <li><strong>Security & Privacy Containment:</strong> Fog allows sensitive data (like patient health records) to be processed and anonymized entirely within the local hospital firewall (Data Residency) before reaching the public cloud, ensuring GDPR/HIPAA compliance.</li>
+            </ol>
+        </section>
+
+        <section id="big-data" class="section-card">
+            <h2>6. The 13Vs of IoT Big Data</h2>
+            <p>Move beyond Volume, Velocity, and Variety. Focus on these IoT-specific challenges:</p>
+            <ul>
+                <li><strong>Veracity:</strong> The trustworthiness of data. Sensors break or get dirty. A dirty thermometer sends false data. IoT systems must handle this uncertainty (Byzantine faults).</li>
+                <li><strong>Volatility:</strong> How fast data expires. A sensor detecting a car crash is highly volatile; its value expires in 2 seconds. Cloud processing is too slow for volatile data.</li>
+                <li><strong>Vulnerability:</strong> IoT devices lack CPU power for heavy encryption, making them prime targets for botnets (e.g., Mirai) and MITM attacks.</li>
+                <li><strong>Validity:</strong> Data might be accurate (Veracity) but applied to the wrong model (e.g., measuring vibration on the wrong axis of a machine).</li>
+            </ul>
+        </section>
+
+        <section id="security" class="section-card">
+            <h2>7. Security Architecture & GDPR</h2>
+            
+            <h3>Hardware Security & Boot</h3>
+            <p>Software security fails if the hardware is compromised. Fog gateways must use a <strong>Hardware Root of Trust (TPM)</strong> to store cryptographic keys safely. They must implement <strong>Secure Boot</strong>: verifying the cryptographic signature of the operating system before booting to ensure no malware has been installed via physical tampering.</p>
+
+            <h3>Data States</h3>
+            <ul>
+                <li><strong>Data in Motion:</strong> Secure using <strong>TLS</strong> (for TCP) or <strong>DTLS</strong> (for UDP/CoAP).</li>
+                <li><strong>Data at Rest:</strong> AES-256 Full Disk Encryption on the Edge Gateway.</li>
+            </ul>
+
+            <h3>GDPR & Privacy</h3>
+            <p>Apply <strong>Privacy by Design</strong>. Apply <strong>Data Minimization</strong>: Edge nodes should strip Personally Identifiable Information (PII) like faces or license plates *locally* before transmitting video to the cloud.</p>
+        </section>
+
+        <section id="wot" class="section-card">
+            <h2>8. Middleware & Web of Things (WoT)</h2>
+            <p><strong>The Problem:</strong> IoT is heavily fragmented. A Zigbee Philips bulb cannot talk natively to an IP-based Google Cloud. <strong>Middleware</strong> (like Azure IoT Edge) acts as the protocol translator and local orchestrator.</p>
+
+            <p><strong>The Web of Things (WoT):</strong> Sits at Layer 7 (Application). It doesn't invent new radio protocols; it uses standard web technologies (HTTP, JSON) to abstract hardware.</p>
+            <ul>
+                <li><strong>Thing Description (TD):</strong> The <code>index.html</code> of a smart device. A JSON-LD document that describes the device's <em>Properties</em> (Read temp), <em>Actions</em> (Turn on motor), and <em>Events</em> (Fire alarm!).</li>
+                <li><strong>Semantic Interoperability:</strong> JSON-LD ensures that different systems agree on the *meaning* of data (e.g., mapping "temp" and "temperature" to the exact same W3C ontology definition).</li>
+            </ul>
+        </section>
+
+        <section id="native" class="section-card">
+            <h2>9. Edge Native vs Cloud Native</h2>
+            <table>
+                <tr>
+                    <th>Cloud Native</th>
+                    <th>Edge Native</th>
+                </tr>
+                <tr>
+                    <td>Assumes perfect, infinite WAN connectivity.</td>
+                    <td>Designed for intermittent connectivity (Autonomous).</td>
+                </tr>
+                <tr>
+                    <td>Hardware Agnostic (runs on any VM).</td>
+                    <td><strong>Hardware Aware</strong> (needs specific sensors/GPUs).</td>
+                </tr>
+                <tr>
+                    <td>Stateless (relies on cloud databases).</td>
+                    <td>Stateful (maintains local cache if offline).</td>
+                </tr>
+            </table>
+
+            <h2 id="5g" style="margin-top: 3rem;">10. 5G URLLC</h2>
+            <p><strong>URLLC (Ultra-Reliable Low-Latency Communication)</strong> is a 5G slice designed specifically for mission-critical IoT (not downloading movies). It guarantees &lt;1ms latency and 99.999% reliability. It is mandatory for <strong>Autonomous Vehicles (V2X)</strong>, Remote Telesurgery, and real-time industrial robotics.</p>
+        </section>
+
+    
+<div class="chapter-nav"><a href="index.html" class="prev"><span class="label">← Back</span><span class="title">Home</span></a><span></span></div>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-modal-content">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search topics, protocols, concepts..." autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script>
+function toggleTheme(){const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('active');}));
+let fuse=null;
+function openSearch(){document.getElementById('searchModal').classList.add('active');document.getElementById('searchInput').focus();if(!fuse)fetch('search-index.json').then(r=>r.json()).then(d=>{fuse=new Fuse(d,{keys:['title','content','keywords'],threshold:.3,includeMatches:true,minMatchCharLength:2});});}
+function closeSearch(){document.getElementById('searchModal').classList.remove('active');document.getElementById('searchInput').value='';document.getElementById('searchResults').innerHTML='';}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+document.getElementById('searchInput').addEventListener('input',function(){if(!fuse)return;const q=this.value.trim(),res=document.getElementById('searchResults');if(q.length<2){res.innerHTML='<div class="search-hint">Type at least 2 characters...</div>';return;}const results=fuse.search(q).slice(0,12);if(!results.length){res.innerHTML='<div class="search-hint">No results found.</div>';return;}res.innerHTML=results.map(r=>'<a class="search-result" href="'+r.item.url+'"><div class="sr-page">'+r.item.page+'</div><div class="sr-title">'+r.item.title+'</div><div class="sr-snippet">'+r.item.content.substring(0,120)+'...</div></a>').join('');});
+</script>
+</body>
+</html>
