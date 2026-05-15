@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ch 2: The Compute Continuum — Fog & Edge Computing Master Textbook</title>
-<meta name="description" content="Ch 2: The Compute Continuum - Complete university-level textbook on Fog, Edge, and IoT Computing">
+<title>Ch 2: The Compute Continuum</title>
+<meta name="description" content="Ch 2: The Compute Continuum - Fog, Edge, and IoT Computing">
 <link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -28,12 +28,17 @@
 <a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
 <a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
 <a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
-<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a></nav>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a>
+<div style="border-top:1px solid var(--border);margin:12px 20px;"></div>
+<div style="padding:4px 20px;font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:var(--text2);font-family:var(--font-heading);font-weight:700">📝 Exam Solutions</div>
+<a href="exam-2023-2024.html"><span class="ch-num">📄</span> 2023–2024 Exam Solutions</a>
+<a href="exam-2024-2025.html"><span class="ch-num">📄</span> 2024–2025 Exam Solutions</a></nav>
   </aside>
   <main class="main-content">
     <div class="topbar" id="topbar">
       <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
       <span class="topbar-title">Chapter 2</span>
+      <button class="search-btn" onclick="openSearch()" title="Search (Ctrl+K)">🔍 Search</button>
       <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
     </div>
     <div class="content-area">
@@ -316,21 +321,28 @@ Compute: Basic thresholds, signal digitization, sleepy-node logic
   </main>
 </div>
 <div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-modal-content">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search topics, protocols, concepts..." autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 <button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script>
-// Theme toggle
-function toggleTheme(){
-  const d=document.documentElement;
-  const t=d.getAttribute('data-theme')==='dark'?'':'dark';
-  d.setAttribute('data-theme',t);
-  localStorage.setItem('theme',t);
-  document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';
-}
+function toggleTheme(){const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';}
 (function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
-// Back to top
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
-// Close sidebar on link click (mobile)
-document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('sidebar').classList.remove('open')));
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('active');}));
+let fuse=null;
+function openSearch(){document.getElementById('searchModal').classList.add('active');document.getElementById('searchInput').focus();if(!fuse)fetch('search-index.json').then(r=>r.json()).then(d=>{fuse=new Fuse(d,{keys:['title','content','keywords'],threshold:.3,includeMatches:true,minMatchCharLength:2});});}
+function closeSearch(){document.getElementById('searchModal').classList.remove('active');document.getElementById('searchInput').value='';document.getElementById('searchResults').innerHTML='';}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+document.getElementById('searchInput').addEventListener('input',function(){if(!fuse)return;const q=this.value.trim(),res=document.getElementById('searchResults');if(q.length<2){res.innerHTML='<div class="search-hint">Type at least 2 characters...</div>';return;}const results=fuse.search(q).slice(0,12);if(!results.length){res.innerHTML='<div class="search-hint">No results found.</div>';return;}res.innerHTML=results.map(r=>'<a class="search-result" href="'+r.item.url+'"><div class="sr-page">'+r.item.page+'</div><div class="sr-title">'+r.item.title+'</div><div class="sr-snippet">'+r.item.content.substring(0,120)+'...</div></a>').join('');});
 </script>
 </body>
 </html>

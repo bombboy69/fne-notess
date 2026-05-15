@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2023–2024 Exam Solutions</title>
+<meta name="description" content="2023–2024 Exam Solutions - Fog, Edge, and IoT Computing">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 Fog & Edge Computing</h2>
+      <small>Master Textbook & Exam Guide</small>
+    </div>
+    <nav><a href="index.html" class=""><span class="ch-num">🏠</span> Home</a>
+<a href="chapter-1.html"><span class="ch-num">1.</span> Foundations of IoT & Big Data Challenges</a>
+<a href="chapter-2.html"><span class="ch-num">2.</span> The Compute Continuum</a>
+<a href="chapter-3.html"><span class="ch-num">3.</span> OpenFog Architecture & NIST Standards</a>
+<a href="chapter-4.html"><span class="ch-num">4.</span> Perception Layer, Sensors, Actuators & IoT Devices</a>
+<a href="chapter-5.html"><span class="ch-num">5.</span> Communication Protocols & Network Technologies</a>
+<a href="chapter-6.html"><span class="ch-num">6.</span> 6LoWPAN, Thread, Matter & IoT Networking</a>
+<a href="chapter-7.html"><span class="ch-num">7.</span> Transport & Application Layer Protocols</a>
+<a href="chapter-8.html"><span class="ch-num">8.</span> Edge Native, Cloud Native, IoT Gateways & Design Patterns</a>
+<a href="chapter-9.html"><span class="ch-num">9.</span> Middleware & Web of Things (WoT)</a>
+<a href="chapter-10.html"><span class="ch-num">10.</span> iFogSim Simulation & Fog Modeling</a>
+<a href="chapter-11.html"><span class="ch-num">11.</span> Security & Privacy in IoT, Fog & Edge</a>
+<a href="chapter-12.html"><span class="ch-num">12.</span> 50-Mark System Design Scenario Masterclass</a>
+<div style="border-top:1px solid var(--border);margin:12px 20px;"></div>
+<div style="padding:4px 20px;font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:var(--text2);font-family:var(--font-heading);font-weight:700">📝 Exam Solutions</div>
+<a href="exam-2023-2024.html" class="active"><span class="ch-num">📄</span> 2023–2024 Exam Solutions</a>
+<a href="exam-2024-2025.html"><span class="ch-num">📄</span> 2024–2025 Exam Solutions</a></nav>
+  </aside>
+  <main class="main-content">
+    <div class="topbar" id="topbar">
+      <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('active')" aria-label="Menu">☰</button>
+      <span class="topbar-title">2023–2024 Exam Solutions</span>
+      <button class="search-btn" onclick="openSearch()" title="Search (Ctrl+K)">🔍 Search</button>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+    <div class="content-area">
+<aside class="sidebar">
+        <h2>Solution Directory</h2>
+        <ul>
+            <li><a href="#q1">Q1: Advantages of Fog Computing</a></li>
+            <li><a href="#q2">Q2: The 13Vs of IoT Big Data</a></li>
+            <li><a href="#q3">Q3: BLE vs. LoRa Comparison</a></li>
+            <li><a href="#q4">Q4: Smart Agriculture System Design</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>MSc Cloud Computing: Fog & Edge Solutions</h1>
+            <div class="meta">
+                <span><strong>Module:</strong> Fog and Edge Computing</span>
+                <span><strong>Max Marks:</strong> 100</span>
+                <span><strong>Type:</strong> Master Solution Manual</span>
+            </div>
+        </header>
+
+        <section id="q1" class="qna-section">
+            <div class="question-box">
+                <h3>Question 1 <span class="marks">[20 Marks]</span></h3>
+                <p>Fog computing is an architecture designed to carry out computations closer to the edge. Critically evaluate four advantages of fog computing. Provide an appropriate example/scenario for each advantage to justify your answers.</p>
+            </div>
+
+            <div class="answer-card answer-box">
+                <h4>Model Answer Overview</h4>
+                <p>Fog computing is a decentralized computing infrastructure in which data, compute, storage, and applications are distributed in the most logical, efficient place between the data source (Edge) and the remote Data Center (Cloud). Below is a critical evaluation of four distinct advantages of this architecture.</p>
+
+                <h4>1. Ultra-Low Latency for Real-Time Applications</h4>
+                <p><strong>Technical Explanation:</strong> Cloud computing inherently suffers from propagation delay due to the physical distance between edge devices and centralized servers (often resulting in Round Trip Times > 100ms). Fog computing places processing nodes one or two hops away from the device, reducing network traversal time to sub-millisecond levels. This enables strict real-time control loops where instantaneous actuation is critical.</p>
+                <p><strong>Practical Scenario:</strong> <em>Autonomous Vehicles (V2X).</em> If a connected car's LiDAR detects a pedestrian stepping into the road, it cannot afford a 100ms delay to send data to AWS and wait for a braking command; a lethal collision would occur. A Fog node located on a nearby roadside gantry processes the spatial data instantly and returns the braking command in under 5ms.</p>
+
+                <h4>2. Conservation of Network Bandwidth</h4>
+                <p><strong>Technical Explanation:</strong> Modern IoT ecosystems generate enormous volumes of raw, high-frequency data. Transmitting all this unrefined data over the Wide Area Network (WAN) congests the core backbone and incurs massive cloud ingress fees. Fog computing implements <em>fractional selectivity</em>—allowing local data filtering, aggregation, and compression. Only semantic metadata or critical anomalies are forwarded upstream.</p>
+                <p><strong>Practical Scenario:</strong> <em>Smart City Surveillance.</em> A metropolis with 5,000 4K CCTV cameras cannot stream all video to a central cloud. Fog nodes mounted on the camera poles run Edge AI object detection. They drop 99% of empty video frames locally and only transmit a 5-second clip and text alert to the cloud when a traffic accident is actively detected.</p>
+
+                <h4>3. Uninterrupted Operation (Resilience to Disconnection)</h4>
+                <p><strong>Technical Explanation:</strong> Cloud-only architectures fail catastrophically if the internet connection is severed. Fog nodes provide local autonomy. If the WAN link drops, the Fog node utilizes local databases and cached machine learning models to continue executing local control logic, ensuring the physical system remains operational.</p>
+                <p><strong>Practical Scenario:</strong> <em>Industrial IoT (Smart Factory).</em> A factory relies on robotic welding arms. If a severe storm severs the factory's fiber-optic connection, a cloud-reliant system would halt all production. A local Fog gateway continues to monitor vibration sensors and control the robots safely, syncing the cached production logs to the cloud only once the WAN connection is restored.</p>
+
+                <h4>4. Enhanced Privacy and Security</h4>
+                <p><strong>Technical Explanation:</strong> Transmitting sensitive raw data across the public internet exposes it to packet sniffing and Man-in-the-Middle (MITM) attacks, violating compliance frameworks like GDPR or HIPAA. Fog computing allows sensitive data to be analyzed, stripped of personally identifiable information (PII), and anonymized strictly within the local, trusted network perimeter.</p>
+                <p><strong>Practical Scenario:</strong> <em>Connected Healthcare.</em> A hospital monitors hundreds of patients using wearable ECGs. To comply with HIPAA, a hospital-based Fog server processes the raw heart-rate data locally to alert nurses of cardiac arrest. It only sends an encrypted, anonymized statistical summary (stripping names and exact locations) to the external cloud for global health research.</p>
+
+                <div class="diagram-wrapper">
+<pre>
+<span class="highlight">CLOUD-ONLY WORKFLOW (Bandwidth & Latency Bottleneck)</span>
+[Sensors] <span class="danger">====== 10 GB/s Raw Data ======></span> [Internet/WAN] <span class="danger">======></span> [AWS Data Center]
+<em>Result: Network saturated, Latency > 100ms, High Cloud Ingress Costs.</em>
+
+<span class="highlight">FOG ARCHITECTURE WORKFLOW (Optimized & Resilient)</span>
+                                          <span class="success">(99% Data Filtered Locally)</span>
+                                          <span class="success">(Only 10 MB/s Metadata to Cloud)</span>
+[Sensors] ---> [Local FOG NODE] <span class="highlight">====================================></span> [AWS Data Center]
+                   |
+                   +---> <span class="highlight">(Local Actuation: < 5ms Latency)</span>
+                   +---> <span class="highlight">(Survives WAN Disconnects)</span>
+</pre>
+                </div>
+                <div class="diagram-caption">Architecture Diagram: Bandwidth Conservation & Latency Reduction via Fog</div>
+
+                <div class="exam-tip">
+                    <div class="tip-title">📝 Exam Tip for Maximum Marks</div>
+                    To secure the full 20 marks, explicitly structure your answer as: <strong>1. Name the Advantage &rarr; 2. Explain the Technical Mechanism &rarr; 3. Provide a specific, physical Scenario.</strong> Avoid vague scenarios like "it is good for smart homes." Prove you understand physical industrial constraints.
+                </div>
+            </div>
+        </section>
+
+        <section id="q2" class="qna-section">
+            <div class="question-box">
+                <h3>Question 2 <span class="marks">[20 Marks]</span></h3>
+                <p>In "A Survey on IoT Big Data" (ACM Comp Surveys, 2020) the authors identified 13 challenges in IoT big data beyond the traditional 3Vs. Describe in detail four challenges beyond the traditional ones (volume, velocity, and variety). Justify their inclusion in a list of IoT challenges.</p>
+            </div>
+
+            <div class="answer-card answer-box">
+                <h4>Model Answer Overview</h4>
+                <p>While traditional enterprise Big Data is characterized by the 3Vs (Volume, Velocity, and Variety), the integration of physical hardware operating in harsh, uncontrolled environments introduces severe complexities. Four critical challenges from the 13Vs framework include <strong>Veracity, Volatility, Vulnerability, and Validity</strong>.</p>
+
+                <h4>1. Veracity</h4>
+                <p><strong>Description:</strong> Veracity refers to the accuracy, trustworthiness, and reliability of the data being generated. In traditional IT, data typed by a user into a database is generally assumed to be accurate. In IoT, data is generated by physical sensors exposed to harsh physical degradation.</p>
+                <p><strong>Justification in IoT:</strong> Sensors degrade over time, get dirty, or suffer from hardware drift. A temperature sensor coated in factory dust might report 20°C when the actual machine temperature is 100°C. Algorithms must be engineered to handle data uncertainty and "Byzantine faults" (where bad data is passed into the system). Without establishing veracity, predictive models fail completely due to <em>Garbage In, Garbage Out (GIGO)</em>.</p>
+
+                <h4>2. Volatility</h4>
+                <p><strong>Description:</strong> Volatility dictates the lifespan of data usefulness—specifically, how long the data remains valid before it becomes irrelevant and expires.</p>
+                <p><strong>Justification in IoT:</strong> In IoT ecosystems, the value of data decays at an extreme rate. For example, a vehicle's sensor indicating a pedestrian is currently stepping into the road is highly volatile; its value expires in roughly 2 seconds. If a centralized cloud system takes 5 seconds to process this data, it is utterly useless. Fog architectures are fundamentally required to process highly volatile data before its narrow expiration window closes.</p>
+
+                <h4>3. Vulnerability</h4>
+                <p><strong>Description:</strong> Vulnerability refers to the massive security risks, attack surfaces, and susceptibility to breaches associated with IoT data collection and transmission processes.</p>
+                <p><strong>Justification in IoT:</strong> IoT devices (e.g., 8-bit microcontrollers) are severely resource-constrained. They lack the CPU power to run standard AES-256 encryption, maintain secure TLS handshakes, or run antivirus software. This makes IoT data inherently more vulnerable to packet sniffing, Man-in-the-Middle (MITM) attacks, and mass botnet recruitment (e.g., the Mirai botnet) compared to data originating from secure enterprise servers behind corporate firewalls.</p>
+
+                <h4>4. Validity</h4>
+                <p><strong>Description:</strong> Validity refers to whether the data collected is actually appropriate and correct for the specific intended algorithmic model or business use case.</p>
+                <p><strong>Justification in IoT:</strong> Data can have high <em>Veracity</em> (it is perfectly accurate) but zero <em>Validity</em>. For example, a perfectly accurate, highly calibrated vibration sensor might be accidentally mounted on the wrong axis of a robotic arm. The data it generates is technically "true," but it is completely invalid for the specific Machine Learning model trying to predict bearing failure on that arm. Ensuring validity requires deep physical domain expertise regarding sensor placement.</p>
+
+                <div class="diagram-wrapper">
+<pre>
+<span class="highlight">[ THE IOT BIG DATA LIFECYCLE & THE 4 V's ]</span>
+
+   [Physical World]        [Network Edge]         [Cloud Analytics]
+      <span class="diagram-accent">SENSORS</span>     ======>  <span class="diagram-accent">FOG GATEWAY</span>   ======>  <span class="diagram-accent">MACHINE LEARNING</span>
+         |                       |                       |
+  +------+------+         +------+------+         +------+------+
+  | <span class="danger">VERACITY</span>    |         |<span class="danger">VULNERABILITY</span>|         | <span class="danger">VALIDITY</span>    |
+  | Are sensors |         | Is the link |         | Is the data |
+  |   broken?   |         |  unsecure?  |         | appropriate?|
+  +-------------+         +-------------+         +-------------+
+         |
+  +------+------+
+  | <span class="danger">VOLATILITY</span>  |
+  | Will data   |
+  | expire soon?|
+  +-------------+
+</pre>
+                </div>
+                <div class="diagram-caption">Data Pipeline Diagram Mapping the V-Challenges to the IoT Architecture</div>
+            </div>
+        </section>
+
+        <section id="q3" class="qna-section">
+            <div class="question-box">
+                <h3>Question 3 <span class="marks">[10 Marks]</span></h3>
+                <p>BLE and LoRa are two important IoT technologies.<br>
+                a) What are the key similarities and differences between them?<br>
+                b) Which type of use case is suitable for each of them? Justify your answer.</p>
+            </div>
+
+            <div class="answer-card answer-box">
+                <h4>Part A: Similarities and Differences (5 Marks)</h4>
+                
+                <p><strong>Key Similarities:</strong></p>
+                <ul>
+                    <li><strong>Energy Efficiency:</strong> Both are designed specifically for the Internet of Things, prioritizing extreme low power consumption to allow "sleepy" end-devices to operate on coin-cell batteries for years.</li>
+                    <li><strong>Spectrum:</strong> Both operate in unlicensed ISM (Industrial, Scientific, and Medical) radio bands, avoiding expensive telecom subscription fees.</li>
+                    <li><strong>Payload Optimization:</strong> Both are optimized for small payload transmissions rather than continuous high-bandwidth streaming (unlike Wi-Fi).</li>
+                </ul>
+
+                <p><strong>Key Differences:</strong></p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>BLE (Bluetooth Low Energy)</th>
+                                <th>LoRa (Long Range)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Spectrum / Frequency</strong></td>
+                                <td>2.4 GHz (High frequency, shorter wavelength)</td>
+                                <td>Sub-GHz (e.g., 868 MHz / 915 MHz) (Long wavelength)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transmission Range</strong></td>
+                                <td>Short range (Typically 10 - 50 meters indoors)</td>
+                                <td>Long range (Up to 15+ kilometers outdoors)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Rate / Bandwidth</strong></td>
+                                <td>High for IoT (Up to 2 Mbps in Bluetooth 5)</td>
+                                <td>Very Low (0.3 kbps to 50 kbps)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modulation Technique</strong></td>
+                                <td>Frequency Hopping Spread Spectrum (FHSS)</td>
+                                <td>Chirp Spread Spectrum (CSS)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Network Topology</strong></td>
+                                <td>Point-to-point, Star, or Mesh (Bluetooth Mesh)</td>
+                                <td>Star-of-Stars (LoRaWAN architecture)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Part B: Use Cases and Justifications (5 Marks)</h4>
+                
+                <p><strong>BLE Suitable Use Case: Wearable Healthcare Monitoring (e.g., Continuous ECG monitors)</strong></p>
+                <p><em>Justification:</em> In a healthcare setting (like a hospital room), the required transmission range is very small (&lt;10m from the patient to a bedside gateway/smartphone). However, the application requires relatively high bandwidth to stream continuous physiological data arrays and ultra-low power to keep the wearable device compact. BLE's 2Mbps throughput at 2.4GHz perfectly fits this short-range, higher-throughput profile.</p>
+
+                <p><strong>LoRa Suitable Use Case: Smart Agriculture Soil Monitoring</strong></p>
+                <p><em>Justification:</em> A commercial farm may span 10,000 acres. Deploying Wi-Fi or BLE gateways every 50 meters is economically impossible. Soil moisture sensors only need to transmit a tiny 10-byte payload once an hour. LoRa's Sub-GHz frequency allows the signal to penetrate dense, wet crop canopies and travel up to 15km to a single farmhouse gateway. It explicitly trades bandwidth (which the farm doesn't need) for extreme range and battery life, making it the only viable physical choice.</p>
+            </div>
+        </section>
+
+        <section id="q4" class="qna-section">
+            <div class="question-box">
+                <h3>Question 4 <span class="marks">[50 Marks]</span></h3>
+                <p>Agriculture and farming sectors have been very receptive to new technology. By using IoT sensors, farmers can collect data on soil moisture, temperature, and nutrient levels over large extensions of land. In this context:</p>
+                <p>a) Discuss how a fog-based solution may be better suited to the scenario. Why might cloud-centric solutions be inadequate?<br>
+                b) Draw a high-level fog-based architecture for the selected scenario (key components and layers should be clearly visible). Discuss the required components and links to implement the scenario.<br>
+                c) Discuss what protocol/standard would you use in the network and application layers for sending/receiving data between the key entities.<br>
+                d) Discuss the type of data aggregations that you would you create at each stage.<br>
+                e) Identify security challenges and propose potential mitigations for the scenario. You should also write down any assumptions taken.</p>
+            </div>
+
+            <div class="answer-card answer-box">
+                <h4>A) Fog-based vs. Cloud-centric Suitability (10 Marks)</h4>
+                <p>A pure cloud-centric architecture is inadequate for a massive agricultural deployment due to several core bottlenecks, defined by the BLURS framework:</p>
+                <ul>
+                    <li><strong>Uninterrupted Transmission (Reliability):</strong> Rural farms often suffer from intermittent or non-existent broadband connectivity. If irrigation actuators rely on a remote cloud server to trigger them, a dropped internet connection means the crops will not be watered, resulting in catastrophic crop loss. A fog-based solution allows local edge gateways to run control loops autonomously, actuating valves even when completely offline.</li>
+                    <li><strong>Bandwidth Constraints & OPEX Cost:</strong> "Large extensions of land" implies tens of thousands of sensors. Transmitting raw telemetry from 50,000 sensors directly to AWS/Azure over a metered cellular or satellite backhaul is prohibitively expensive. Fog computing aggregates this locally, reducing WAN transmission volumes drastically.</li>
+                    <li><strong>Resource Constraints:</strong> Soil sensors must run on batteries for up to 10 years. Sending data directly to a cloud requires heavy IP stacks and TCP handshakes which drain batteries instantly. Fog allows sensors to use lightweight, non-IP MAC protocols to a local gateway.</li>
+                </ul>
+
+                <h4>B) High-Level Architecture & Components (10 Marks)</h4>
+                <p>The architecture is divided into a hierarchical Compute Continuum:</p>
+                
+                <div class="diagram-wrapper">
+<pre>
+<span class="highlight">[ LAYER 4: CLOUD TIER ]</span>  <span class="diagram-text"><-- (Strategic Intelligence)</span>
+       | <strong>AWS / Azure IoT Core</strong>
+       | Functions: Multi-year crop yield analysis, global weather 
+       | pattern integration, farmer mobile dashboard rendering.
+       |
+       ^ <span class="diagram-accent">(Satellite / 4G Cellular Backhaul WAN)</span>
+       |
+<span class="highlight">[ LAYER 3 & 2: FOG / EDGE TIER ]</span> <span class="diagram-text"><-- (Tactical Intelligence)</span>
+       | <strong>The Farmhouse Central Gateway (Ruggedized Industrial PC)</strong>
+       | Functions: Protocol translation, Edge AI (Drought prediction),
+       | local database caching, local actuator triggering.
+       |
+       ^ <span class="diagram-accent">(Sub-GHz Wireless LPWAN Link)</span>
+       |
+<span class="highlight">[ LAYER 1: MIST / PERCEPTION TIER ]</span> <span class="diagram-text"><-- (The Physical World)</span>
+       | <strong>Devices:</strong> 
+       |  - Soil Moisture Sensors (Capacitive)
+       |  - NPK (Nutrient) Sensors
+       |  - Temperature / Humidity Probes
+       | <strong>Actuators:</strong>
+       |  - Smart Solenoid Irrigation Valves
+</pre>
+                </div>
+                <p><strong>Components & Links:</strong> The Mist layer consists of battery-operated microcontrollers embedded in the soil. They are linked via a long-range wireless topology to the Fog node (Gateway) mounted on a tall structure (like a silo or farmhouse roof to maximize Line of Sight). The Fog node is linked to the Cloud via a standard IP-based WAN connection.</p>
+
+                <h4>C) Protocol & Standard Selection (10 Marks)</h4>
+                <p>Protocol selection is dictated strictly by the physical constraints of the farm.</p>
+                <ul>
+                    <li><strong>Perception to Fog Node (Link/Network Layer):</strong> I select <span class="keyword">LoRaWAN (Class A for sensors, Class B for actuators)</span>.
+                        <ul>
+                            <li><em>Justification:</em> The prompt specifies "large extensions of land." Wi-Fi and BLE fail due to short range. NB-IoT fails if there are no cell towers nearby. LoRaWAN uses Sub-GHz frequencies that easily penetrate wet crop canopies and travel up to 15km. Class A allows sensors to sleep maximally, saving battery. Class B allows the gateway to wake up actuators at scheduled intervals to open valves.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Fog Node to Cloud (Application Layer):</strong> I select <span class="keyword">MQTT over TCP/IP</span>.
+                        <ul>
+                            <li><em>Justification:</em> The Fog Gateway at the farmhouse is assumed to have continuous mains power. Therefore, the overhead of the TCP 3-way handshake is acceptable. MQTT provides a highly reliable Publish/Subscribe model. We will use <strong>QoS 1 (At least once)</strong> to ensure that critical daily agricultural summaries are not lost if the rural internet backhaul temporarily drops.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>D) Data Aggregation Strategy (10 Marks)</h4>
+                <p>Aggregation occurs hierarchically to conserve network bandwidth and cloud ingress costs:</p>
+                <ul>
+                    <li><strong>At the Mist Layer (Sensor):</strong> The sensor samples analog moisture every 1 minute. It calculates a 1-hour average internally and only transmits a single, compressed 12-byte payload to the Fog node hourly.</li>
+                    <li><strong>At the Fog Layer (Gateway):</strong> The Gateway receives data from 10,000 sensors. It applies <em>Fractional Selectivity</em>. It does not forward this raw telemetry to the cloud. Instead, it runs an edge analytics model to aggregate the data into a single "Daily Zone Health Report" (e.g., <code>{"ZoneA_Moisture": "40%", "ZoneB_Moisture": "42%"}</code>). It only sends an immediate interrupt payload to the cloud if a critical threshold is breached (e.g., "Frost warning: Temp dropped below 0°C").</li>
+                </ul>
+
+                <h4>E) Security Challenges, Mitigations, and Assumptions (10 Marks)</h4>
+                
+                <p><strong>Security Challenges:</strong></p>
+                <ul>
+                    <li><em>Physical Tampering (Node-level):</em> Sensors in open fields can be easily stolen or tampered with to inject false data (spoofing a drought to force the system to waste water).</li>
+                    <li><em>Eavesdropping/MITM:</em> Unencrypted radio transmissions over large distances can be intercepted or replayed by attackers to map the farm's proprietary yields.</li>
+                </ul>
+
+                <p><strong>Mitigations:</strong></p>
+                <ul>
+                    <li><em>Data in Motion:</em> LoRaWAN utilizes <strong>AES-128 encryption</strong> natively. It uses a Network Session Key (NwkSKey) for routing security and an Application Session Key (AppSKey) for end-to-end payload encryption, preventing MITM attacks.</li>
+                    <li><em>Node Security:</em> The Fog Gateway will utilize <strong>Secure Boot</strong> and a <strong>Trusted Platform Module (TPM)</strong> to ensure malicious firmware cannot be loaded onto the gateway to alter irrigation logic. Edge sensors will use tamper-evident potting (epoxy).</li>
+                </ul>
+
+                <p><strong>Engineering Assumptions:</strong></p>
+                <ol>
+                    <li>I assume that the edge sensors rely strictly on coin-cell batteries supplemented by small solar (photovoltaic) energy harvesters, necessitating ultra-low duty cycles.</li>
+                    <li>I assume the central Fog Gateway has access to continuous mains power and a reliable, albeit low-bandwidth, internet connection (such as Starlink or rural 4G).</li>
+                    <li>I assume the terrain is relatively flat, permitting near-Line-of-Sight radio transmission for the LoRa gateways.</li>
+                </ol>
+
+                <div class="exam-tip">
+                    <div class="tip-title">💡 Pro Tip for 50-Mark Scenarios</div>
+                    Never skip the <strong>"Assumptions"</strong> section. Examiners award critical thinking marks to students who recognize that real-world engineering requires making logical assumptions about power availability, terrain, and legacy infrastructure constraints.
+                </div>
+            </div>
+        </section>
+
+    </main>
+    </div>
+  </main>
+</div>
+<div class="overlay" id="overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-modal-content">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search topics, protocols, concepts..." autocomplete="off">
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+<button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script>
+function toggleTheme(){const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'':'dark';d.setAttribute('data-theme',t);localStorage.setItem('theme',t);document.querySelector('.theme-toggle').textContent=t?'☀️ Light':'🌙 Dark';}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️ Light':'🌙 Dark';}})();
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)});
+document.querySelectorAll('.sidebar nav a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('active');}));
+let fuse=null;
+function openSearch(){document.getElementById('searchModal').classList.add('active');document.getElementById('searchInput').focus();if(!fuse)fetch('search-index.json').then(r=>r.json()).then(d=>{fuse=new Fuse(d,{keys:['title','content','keywords'],threshold:.3,includeMatches:true,minMatchCharLength:2});});}
+function closeSearch(){document.getElementById('searchModal').classList.remove('active');document.getElementById('searchInput').value='';document.getElementById('searchResults').innerHTML='';}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape')closeSearch();});
+document.getElementById('searchInput').addEventListener('input',function(){if(!fuse)return;const q=this.value.trim(),res=document.getElementById('searchResults');if(q.length<2){res.innerHTML='<div class="search-hint">Type at least 2 characters...</div>';return;}const results=fuse.search(q).slice(0,12);if(!results.length){res.innerHTML='<div class="search-hint">No results found.</div>';return;}res.innerHTML=results.map(r=>'<a class="search-result" href="'+r.item.url+'"><div class="sr-page">'+r.item.page+'</div><div class="sr-title">'+r.item.title+'</div><div class="sr-snippet">'+r.item.content.substring(0,120)+'...</div></a>').join('');});
+</script>
+</body>
+</html>
